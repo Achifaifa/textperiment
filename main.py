@@ -6,9 +6,10 @@ import effects, engine
 c=engine.context()
 
 def loop(step):
-  effects.meatballs(c,step)
+  #effects.meatballs(c,step)
+  effects.starfield(c,step)
 
-if __name__=="__main__":
+def main():
   step=1
   while 1:
     c.clear()
@@ -16,3 +17,9 @@ if __name__=="__main__":
     step+=1
     c.draw()
     time.sleep(1/30)
+
+if __name__=="__main__":
+  try:
+    main()
+  except KeyboardInterrupt:
+    exit()

@@ -14,10 +14,6 @@ class context:
     self.xsize=x
     self.ysize=y
 
-  def clear(self):
-
-    self.grid=[[" " for i in range(self.xsize)] for i in range(self.ysize)]
-
   def draw(self):
 
     os.system('clear')
@@ -58,6 +54,11 @@ class context:
     self.line(x,y,x,y+ysize,char)
     self.line(x+xsize,y,x+xsize,y+ysize,char)
     self.line(x,y+ysize,x+ysize,y+ysize,char)
+
+  def clear(self):
+
+    self.grid=[[" " for i in range(self.xsize)] for i in range(self.ysize)]
+    self.rectangle(0,0,79,39,"#")
 
 if __name__=="__main__":
   pass

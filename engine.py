@@ -16,7 +16,7 @@ class context:
 
   def draw(self):
 
-    os.system('clear')
+    print "\x1B[1;1H"
     for i in self.grid: print "".join(i)
 
   def line(self,x0,y0,x1,y1,char):
@@ -53,7 +53,7 @@ class context:
     self.line(x,y,x+xsize,y,char)
     self.line(x,y,x,y+ysize,char)
     self.line(x+xsize,y,x+xsize,y+ysize,char)
-    self.line(x,y+ysize,x+ysize,y+ysize,char)
+    self.line(x,y+ysize,x+xsize,y+ysize,char)
 
   def clear(self):
 

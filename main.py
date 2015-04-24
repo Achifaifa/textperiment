@@ -20,6 +20,8 @@ def main():
 
 if __name__=="__main__":
   try:
+    # print "\x1B[?25l"
     main()
   except KeyboardInterrupt:
+    # print "\x1B[?25h"
     exit()

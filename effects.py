@@ -1,5 +1,6 @@
 import math, random
 
+adjust=lambda x: int(math.floor(x))
 meatt=1.4
 meatgoo=0.95
 def meatballs(context,step):
@@ -32,7 +33,6 @@ def starfield(context,step):
     fillchar="*" if 0<starxpos<80 or 0<starypos<40 else " "
     try: context.putpixel(starxpos,starypos,fillchar)
     except: pass
-
     # Incerment star step, reset position and randomize direction if out of field
     if starobj["step"]<starobj["speed"]: starobj["step"]+=0.2
     else:
@@ -43,8 +43,36 @@ def starfield(context,step):
   # Create a pool of N stars in random positions
   global starsobj
   if step==1:
-    for i in range(20):
-      starsobj.append({"speed":1+random.randrange(10),"dir":random.random()*6.28})
-      starsobj[i]["step"]=2
+    for i in range(20): starsobj.append({"speed":1+random.randrange(10),"dir":random.random()*6.28,"step":3})
+  for i in starsobj: movestar(i)
 
-  for i in starsobj: movestar(i);
+if __name__=="__main__":
+  pass
+
+def threedcube(context,step):
+
+  # Position and size
+  rotcubex=40;
+  rotcubey=20;
+  rotcubes=10;
+  # Draw moving points
+  cubepoint1=[adjust(rotcubex+math.cos(step*0.035)*15),       adjust(rotcubey-rotcubes*0.6+math.sin(step*0.035)*3)      ]
+  cubepoint2=[adjust(rotcubex+math.cos((step+45)*0.035)*15),  adjust(rotcubey-rotcubes*0.6+math.sin((step+45)*0.035)*3) ]
+  cubepoint3=[adjust(rotcubex+math.cos((step+90)*0.035)*15),  adjust(rotcubey-rotcubes*0.6+math.sin((step+90)*0.035)*3) ]
+  cubepoint4=[adjust(rotcubex+math.cos((step+135)*0.035)*15), adjust(rotcubey-rotcubes*0.6+math.sin((step+135)*0.035)*3)]
+  cubepoint5=[cubepoint1[0],cubepoint1[1]+10]
+  cubepoint6=[cubepoint2[0],cubepoint2[1]+10]
+  cubepoint7=[cubepoint3[0],cubepoint3[1]+10]
+  cubepoint8=[cubepoint4[0],cubepoint4[1]+10]
+  context.line(cubepoint1[0],cubepoint1[1],cubepoint2[0],cubepoint2[1],".")
+  context.line(cubepoint2[0],cubepoint2[1],cubepoint3[0],cubepoint3[1],".")
+  context.line(cubepoint3[0],cubepoint3[1],cubepoint4[0],cubepoint4[1],".")
+  context.line(cubepoint4[0],cubepoint4[1],cubepoint1[0],cubepoint1[1],".")
+  context.line(cubepoint5[0],cubepoint5[1],cubepoint6[0],cubepoint6[1],".")
+  context.line(cubepoint6[0],cubepoint6[1],cubepoint7[0],cubepoint7[1],".")
+  context.line(cubepoint7[0],cubepoint7[1],cubepoint8[0],cubepoint8[1],".")
+  context.line(cubepoint8[0],cubepoint8[1],cubepoint5[0],cubepoint5[1],".")
+  context.line(cubepoint1[0],cubepoint1[1],cubepoint5[0],cubepoint5[1],".")
+  context.line(cubepoint2[0],cubepoint2[1],cubepoint6[0],cubepoint6[1],".")
+  context.line(cubepoint3[0],cubepoint3[1],cubepoint7[0],cubepoint7[1],".")
+  context.line(cubepoint4[0],cubepoint4[1],cubepoint8[0],cubepoint8[1],".")

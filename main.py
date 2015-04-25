@@ -1,13 +1,14 @@
 #!/usr/bin/env python
 
-import time
+import os, time
 import effects, engine
 
 c=engine.context()
 
 def loop(step):
-  #effects.meatballs(c,step)
-  effects.starfield(c,step)
+  # effects.meatballs(c,step)
+  # effects.starfield(c,step)
+  effects.threedcube(c,step)
 
 def main():
   step=1
@@ -20,8 +21,8 @@ def main():
 
 if __name__=="__main__":
   try:
-    # print "\x1B[?25l"
+    os.system('clear')
     main()
   except KeyboardInterrupt:
-    # print "\x1B[?25h"
+    os.system('clear')
     exit()

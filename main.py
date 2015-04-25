@@ -6,9 +6,10 @@ import effects, engine
 c=engine.context()
 
 def loop(step):
-  # effects.meatballs(c,step)
+  effects.meatballs(c,step)
+  c.text(1,10,"   TEST")
   # effects.starfield(c,step)
-  effects.threedcube(c,step)
+  # effects.threedcube(c,step)
 
 def main():
   step=1

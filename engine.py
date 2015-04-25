@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 
+import font
 import math, os
 
 adjust=lambda x: int(math.floor(x))
@@ -70,6 +71,16 @@ class context:
     self.line(x,y,x,y+ysize,char)
     self.line(x+xsize,y,x+xsize,y+ysize,char)
     self.line(x,y+ysize,x+xsize,y+ysize,char)
+
+  def text(self,x,y,string):
+
+    for i in range(7): #Height of the font
+      line="".join([eval("font."+letter+"[i]") for letter in string.lower().replace(" ","_")])
+      for j in range(79-x): #total space left
+        try:
+          self.putpixel(x+j,y+i,line[j])
+        except: 
+          pass
 
   def clear(self):
 

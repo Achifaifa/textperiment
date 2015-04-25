@@ -7,7 +7,7 @@ c=engine.context()
 
 def loop(step):
   effects.meatballs(c,step)
-  c.text(1,10,"   TEST")
+  c.text(1,10,".","   TEST")
   # effects.starfield(c,step)
   # effects.threedcube(c,step)
 

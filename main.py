@@ -15,7 +15,7 @@ def main():
   while 1:
     c.clear()
     loop(step)
-    step+=1
+    step+=0.3
     c.draw()
     time.sleep(1/30)
 

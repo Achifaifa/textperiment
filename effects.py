@@ -1,6 +1,7 @@
 import math, random
 
 adjust=lambda x: int(math.floor(x))
+
 meatt=1.4
 meatgoo=0.95
 def meatballs(context,step):
@@ -64,15 +65,15 @@ def threedcube(context,step):
   cubepoint6=[cubepoint2[0],cubepoint2[1]+10]
   cubepoint7=[cubepoint3[0],cubepoint3[1]+10]
   cubepoint8=[cubepoint4[0],cubepoint4[1]+10]
-  context.line(cubepoint1[0],cubepoint1[1],cubepoint2[0],cubepoint2[1],".")
-  context.line(cubepoint2[0],cubepoint2[1],cubepoint3[0],cubepoint3[1],".")
-  context.line(cubepoint3[0],cubepoint3[1],cubepoint4[0],cubepoint4[1],".")
-  context.line(cubepoint4[0],cubepoint4[1],cubepoint1[0],cubepoint1[1],".")
-  context.line(cubepoint5[0],cubepoint5[1],cubepoint6[0],cubepoint6[1],".")
-  context.line(cubepoint6[0],cubepoint6[1],cubepoint7[0],cubepoint7[1],".")
-  context.line(cubepoint7[0],cubepoint7[1],cubepoint8[0],cubepoint8[1],".")
-  context.line(cubepoint8[0],cubepoint8[1],cubepoint5[0],cubepoint5[1],".")
-  context.line(cubepoint1[0],cubepoint1[1],cubepoint5[0],cubepoint5[1],".")
-  context.line(cubepoint2[0],cubepoint2[1],cubepoint6[0],cubepoint6[1],".")
-  context.line(cubepoint3[0],cubepoint3[1],cubepoint7[0],cubepoint7[1],".")
-  context.line(cubepoint4[0],cubepoint4[1],cubepoint8[0],cubepoint8[1],".")
+  context.line(cubepoint1[0],cubepoint1[1],cubepoint2[0],cubepoint2[1],"a")
+  context.line(cubepoint2[0],cubepoint2[1],cubepoint3[0],cubepoint3[1],"b")
+  context.line(cubepoint3[0],cubepoint3[1],cubepoint4[0],cubepoint4[1],"c")
+  context.line(cubepoint4[0],cubepoint4[1],cubepoint1[0],cubepoint1[1],"d")
+  context.line(cubepoint5[0],cubepoint5[1],cubepoint6[0],cubepoint6[1],"e")
+  context.line(cubepoint6[0],cubepoint6[1],cubepoint7[0],cubepoint7[1],"f")
+  context.line(cubepoint7[0],cubepoint7[1],cubepoint8[0],cubepoint8[1],"g")
+  context.line(cubepoint8[0],cubepoint8[1],cubepoint5[0],cubepoint5[1],"h")
+  context.line(cubepoint1[0],cubepoint1[1],cubepoint5[0],cubepoint5[1],"|")
+  context.line(cubepoint2[0],cubepoint2[1],cubepoint6[0],cubepoint6[1],"|")
+  context.line(cubepoint3[0],cubepoint3[1],cubepoint7[0],cubepoint7[1],"|")
+  context.line(cubepoint4[0],cubepoint4[1],cubepoint8[0],cubepoint8[1],"|")

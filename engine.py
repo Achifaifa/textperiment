@@ -2,6 +2,8 @@
 
 import math, os
 
+adjust=lambda x: int(math.floor(x))
+
 class context:
 
   def __init__(self):
@@ -27,9 +29,11 @@ class context:
     """
 
     sign=lambda x: cmp(x,0) #Python doesn't have this and that's dumb
+    
     deltax=x1-x0
     deltay=y1-y0
     error=0
+    if x0>x1: x0,y0,x1,y1=x1,y1,x0,y0
     try:
       deltaerr=abs(deltay/deltax)
       y=y0
@@ -43,6 +47,18 @@ class context:
     #And then added this for vertical lines
     except ZeroDivisionError:
       for i in range(abs(deltay)): self.grid[y0+(i*sign(y1-y0))][x0]=char
+    # if deltax>deltay:
+    #   if x0>x1: x0,y0,x1,y1=x1,y1,x0,y0
+    #   if y1>y0:
+    #     for i in range(1,deltax+1): self.grid[adjust(y0+deltay*(i/deltax))][x0+i]=char
+    #   else:
+    #     for i in range(1,deltax+1): self.grid[adjust(y0-deltay*(i/deltax))][x0+i]=char
+    # else:
+    #   if y0>y1: x0,y0,x1,y1=x1,y1,x0,y0
+    #   if x1>x0:
+    #     for i in range(1,deltay+1): self.grid[y0+i][adjust(x0+deltax*(i/deltay))]=char
+    #   else:
+    #     for i in range(1,deltay+1): self.grid[y0+i][adjust(x0-deltax*(i/deltay))]=char
 
   def putpixel(self,x,y,char):
 

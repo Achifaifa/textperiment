@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import os, time
+import os, subprocess, time
 import effects, engine
 
 c=engine.context()
@@ -13,6 +13,7 @@ def loop(step):
 
 def main():
   step=1
+  subprocess.Popen(["bash","flea-noecho.sh",])
   while 1:
     c.clear()
     loop(step)

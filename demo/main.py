@@ -17,7 +17,8 @@ def loop(step):
   # c.text(1,10,".","   TEST")
   # ef.starfield(c,step)
   # ef.threedcube(c,step/3)
-  ef.scroll(c,"TEST",5,"#",step*2)
+  # ef.scroll(c,"TEST",5,"#",step*2)
+  c.circle(40,20,10,"0")
   # DEMO ZONE
   if beat==235:1/0
 
@@ -50,5 +51,6 @@ def main():
     time.sleep(1/30)
 
 if __name__=="__main__":
-  try: main()
-  except: subprocess.call(["rm","flea.sh"]); os.system('clear')
+  main()
+  #try: main()
+  #except: subprocess.call(["rm","flea.sh"]); os.system('clear')

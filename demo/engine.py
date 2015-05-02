@@ -56,6 +56,28 @@ class context:
     self.line(x+xsize,y,x+xsize,y+ysize,char)
     self.line(x,y+ysize,x+xsize+1,y+ysize,char)
 
+  def circle(self,x0,y0,rad,char):
+
+    x=rad
+    y=0
+    radiusError=1-x
+   
+    while x>=y:
+      self.putpixel( x+x0, y+y0,char)
+      self.putpixel( y+x0, x+y0,char)
+      self.putpixel(-x+x0, y+y0,char)
+      self.putpixel(-y+x0, x+y0,char)
+      self.putpixel(-x+x0,-y+y0,char)
+      self.putpixel(-y+x0,-x+y0,char)
+      self.putpixel( x+x0,-y+y0,char)
+      self.putpixel( y+x0,-x+y0,char)
+      y+=1
+      if radiusError<0:
+        radiusError+=(2*y+1)
+      else:
+        x-=1
+        radiusError+=(2*(y-x)+1)
+
   def text(self,x,y,char,string):
 
     for i in range(7): #Height of the font

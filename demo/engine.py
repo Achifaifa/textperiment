@@ -20,6 +20,7 @@ class context:
 
   def draw(self):
 
+    self.rectangle(0,0,79,39,"#")
     print "\x1B[1;1H"
     for i in self.grid: print "".join(i)
 
@@ -38,12 +39,8 @@ class context:
       for i in range(abs(deltay)): self.putpixel(x0, y0+i*sign(deltay), char) 
     elif abs(deltax)>abs(deltay):
       if x0>x1: x0,y0,x1,y1=x1,y1,x0,y0
-      # if y0<y1:
       for i in range(abs(deltax)): 
           self.putpixel(x0+i, y0+deltay*i/deltax, char)
-      # else:
-      #   for i in range(abs(deltax)): 
-      #       self.putpixel(x0+i, y0+deltay*i/deltax, char)
     else:
       if y0>y1: x0,y0,x1,y1=x1,y1,x0,y0
       for i in range(abs(deltay)): 
@@ -90,7 +87,6 @@ class context:
   def clear(self):
 
     self.grid=[[" " for i in range(self.xsize)] for i in range(self.ysize)]
-    self.rectangle(0,0,79,39,"#")
 
 if __name__=="__main__":
   pass

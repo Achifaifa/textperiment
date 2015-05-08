@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import os, subprocess, time
+import math, os, subprocess, time
 import effects as ef, engine
 
 c=engine.context()
@@ -18,7 +18,8 @@ def loop(step):
   # ef.starfield(c,step)
   # ef.threedcube(c,step/3)
   # ef.scroll(c,"TEST",5,"#",step*2)
-  c.circle(40,20,10,"0")
+  #c.circle(40,20,10,"0")
+  ef.euskallogo(c,int(math.floor(step/4)))
   # DEMO ZONE
   if beat==235:1/0
 
@@ -50,7 +51,9 @@ def main():
     c.draw()
     time.sleep(1/30)
 
+debug=0
 if __name__=="__main__":
-  main()
-  #try: main()
-  #except: subprocess.call(["rm","flea.sh"]); os.system('clear')
+  if debug: main()
+  else:
+    try: main()
+    except: subprocess.call(["rm","flea.sh"]); os.system('clear')

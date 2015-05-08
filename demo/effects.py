@@ -1,4 +1,5 @@
 import math, random
+import euskal
 
 adjust=lambda x: int(math.floor(x))
 
@@ -47,9 +48,6 @@ def starfield(context,step):
     for i in range(20): starsobj.append({"speed":1+random.randrange(10),"dir":random.random()*6.28,"step":3})
   for i in starsobj: movestar(i)
 
-if __name__=="__main__":
-  pass
-
 def threedcube(context,step):
 
   # Position and size
@@ -81,3 +79,13 @@ def threedcube(context,step):
 def scroll(context,text,y,char,step):
 
   context.text(81-step,y,char,text)
+
+def euskallogo(context,step):
+  
+  for ni,i in enumerate(euskal.logo[step:]):
+    for nj,j in enumerate(i):
+      try: context.grid[ni][nj]=j
+      except: pass
+
+if __name__=="__main__":
+  pass

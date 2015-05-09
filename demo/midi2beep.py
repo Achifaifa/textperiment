@@ -48,7 +48,9 @@ for j in xt:
       if c2[i]<mn:c2[i]=-1
     nf,ln=1,0
     for i in c2:
-      if i!=(-1):ln+=1;if nf==1:fn,nf=i,0
+      if i!=(-1):
+        ln+=1
+        if nf==1:fn,nf=i,0
     if ln==0:
       if nfpause:print "beep -f 1 -l 0 -D "+str(int((j.time-ctime)*mult))
     elif ln==1:print "beep -f "+str(mnf(fn))+" -l "+str((j.time-ctime)*mult);nfpause=1

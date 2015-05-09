@@ -40,9 +40,10 @@ def updatebeat():
 def main():
 
   global cycle
-  # path=os.getcwd()
-  # os.system("./midi2beep.py -o flea.sh music.mid 1 2 6 7")
-  # subprocess.Popen(["bash","flea.sh",])
+  if audio:
+    path=os.getcwd()
+    os.system("./midi2beep.py -o music.sh music.mid")
+    subprocess.Popen(["bash","music.sh",])
   while 1:
     c.clear()
     beat=updatebeat()
@@ -51,9 +52,10 @@ def main():
     c.draw()
     time.sleep(1/30)
 
-debug=0
+dev=0
+audio=1
 if __name__=="__main__":
-  if debug: main()
+  if dev: main()
   else:
     try: main()
     except: subprocess.call(["rm","flea.sh"]); os.system('clear')

@@ -4,8 +4,13 @@ Placed into the public domain in December 2001 by Will Ware
 import sys, string, types, exceptions
 debugflag=0
 
-def showstr(str, n=16):for x in str[:n]: print ('%02x' % ord(x)),;print
-def getNumber(str, length):sum=0;for i in range(length): sum=(sum<<8)+ord(str[i]);return sum, str[length:]
+def showstr(str, n=16):
+  for x in str[:n]: print ('%02x' % ord(x)),
+  print
+def getNumber(str, length):
+  sum=0
+  for i in range(length): sum=(sum<<8)+ord(str[i])
+  return sum, str[length:]
 def getVariableLengthNumber(str):
   sum=i=0
   while 1:
@@ -45,13 +50,15 @@ class Enumeration:
       uniqueNames.append(x);uniqueValues.append(i);lookup[x]=i;reverseLookup[i]=x;i+=1
     self.lookup=lookup;self.reverseLookup=reverseLookup
   def __add__(self, other):
-  lst=[]
+    lst=[]
     for k in self.lookup.keys(): lst.append((k, self.lookup[k]))
     for k in other.lookup.keys(): lst.append((k, other.lookup[k]))
     return Enumeration(lst)
   def hasattr(self, attr):return self.lookup.has_key(attr)
   def has_value(self, attr):return self.reverseLookup.has_key(attr)
-  def __getattr__(self, attr):if not self.lookup.has_key(attr): raise AttributeError;return self.lookup[attr]
+  def __getattr__(self, attr):
+    if not self.lookup.has_key(attr): raise AttributeError
+    return self.lookup[attr]
   def whatis(self, value):return self.reverseLookup[value]
 channelVoiceMessages=Enumeration([("NOTE_OFF", 0x80),("NOTE_ON", 0x90),("POLYPHONIC_KEY_PRESSURE", 0xA0),
 ("CONTROLLER_CHANGE", 0xB0),("PROGRAM_CHANGE", 0xC0),("CHANNEL_KEY_PRESSURE", 0xD0),("PITCH_BEND", 0xE0)])
@@ -142,7 +149,7 @@ class MidiChannel:
       del self.pitches[pitch]
 class DeltaTime(MidiEvent):
   type="DeltaTime"
-  def read(self, oldstr):;self.time, newstr=getVariableLengthNumber(oldstr);return self.time, newstr
+  def read(self, oldstr):self.time,newstr=getVariableLengthNumber(oldstr);return self.time, newstr
   def write(self):return putVariableLengthNumber(self.time)
 class MidiTrack:
   def __init__(self, index):

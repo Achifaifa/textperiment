@@ -1,5 +1,4 @@
 import math, random
-import euskal
 
 adjust=lambda x: int(math.floor(x))
 
@@ -80,9 +79,9 @@ def scroll(context,text,y,char,step):
 
   context.text(81-step,y,char,text)
 
-def euskallogo(context,step):
+def euskallogo(context,logo,step):
   
-  for ni,i in enumerate(euskal.logo[step:]):
+  for ni,i in enumerate(logo[step:step+40]):
     for nj,j in enumerate(i):
       try: context.grid[ni][nj]=j
       except: pass

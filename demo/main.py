@@ -18,8 +18,8 @@ def loop(step):
   # ef.starfield(c,step)
   # ef.threedcube(c,step/3)
   # ef.scroll(c,"TEST",5,"#",step*2)
-  c.circle(40,20,10,"0")
-  # ef.euskallogo(c,int(math.floor(step/4)))
+  # c.circle(40,20,10,"0")
+  ef.euskallogo(c,vscroll,int(math.floor(step/4)))
   # DEMO ZONE
   if beat==235:1/0
 
@@ -32,13 +32,27 @@ def updatebeat():
   if beatpool>363:
     beatpool=0;
     beat=beat+1;
-  # Beat printing for syncing and debugging
-  # Remove for release pl0x
+  # Remove this for release :D
   print beat,"/",cycle,"/",subcycle
   return beat
 
-def main():
+def decode(string):
+  counter=""
+  out=""
+  for i in string:
+    if i.isdigit():counter+=i
+    else: 
+      if counter:out+=(int(counter)*i)
+      else:out+=i
+      counter=""
+  return out
 
+def decodescroll():
+  with open("./rlescroll","r") as scrollin:
+    with open("./finalscroll","w+") as scrollout:
+      for line in scrollin: scrollout.write(decode(line.rstrip('\n'))+'\n')
+
+def main():
   global cycle
   if audio:
     path=os.getcwd()
@@ -53,9 +67,12 @@ def main():
     time.sleep(1/30)
 
 dev=0
-audio=1
+audio=0
 if __name__=="__main__":
+  decodescroll()
+  with open("./finalscroll","r") as rles:
+    vscroll=rles.readlines()
   if dev: main()
   else:
     try: main()
-    except: subprocess.call(["rm","flea.sh"]); os.system('clear')
+    except: subprocess.call(["rm","music.sh","finalscroll"]); os.system('clear')

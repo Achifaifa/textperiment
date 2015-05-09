@@ -18,8 +18,8 @@ def loop(step):
   # ef.starfield(c,step)
   # ef.threedcube(c,step/3)
   # ef.scroll(c,"TEST",5,"#",step*2)
-  #c.circle(40,20,10,"0")
-  ef.euskallogo(c,int(math.floor(step/4)))
+  c.circle(40,20,10,"0")
+  # ef.euskallogo(c,int(math.floor(step/4)))
   # DEMO ZONE
   if beat==235:1/0
 

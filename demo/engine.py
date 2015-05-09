@@ -9,9 +9,6 @@ sign=lambda x: cmp(x,0) #Python doesn't have this and that's dumb
 class context:
 
   def __init__(self):
-    """
-    Initializes a work area
-    """
 
     x,y=80,40
     self.grid=[[" " for i in range(x)] for i in range(y)]
@@ -26,15 +23,12 @@ class context:
 
   def putpixel(self,x,y,char):
 
-    try:
-      self.grid[adjust(y)][adjust(x)]=char
-    except:
-      self.grid[y][x]=char
+    try:self.grid[adjust(y)][adjust(x)]=char
+    except:self.grid[y][x]=char
 
   def line(self,x0,y0,x1,y1,char):
     
-    deltax=x1-x0
-    deltay=y1-y0
+    deltax=x1-x0;deltay=y1-y0
     if deltax==0:
       for i in range(abs(deltay)): self.putpixel(x0, y0+i*sign(deltay), char) 
     elif abs(deltax)>abs(deltay):
@@ -53,27 +47,48 @@ class context:
     self.line(x+xsize,y,x+xsize,y+ysize,char)
     self.line(x,y+ysize,x+xsize+1,y+ysize,char)
 
-  def circle(self,x0,y0,rad,char):
+  def circle(self,xc,yc,b,char):
+    a=b*2
+    a2=a*a
+    b2=b*b
+    twoa2=2*a2
+    twob2=2*b2
+    x=0
+    y=b
+    px=0
+    py=twoa2*y
 
-    x=rad
-    y=0
-    radiusError=1-x
-   
-    while x>=y:
-      self.putpixel( x+x0, y+y0,char)
-      self.putpixel( y+x0, x+y0,char)
-      self.putpixel(-x+x0, y+y0,char)
-      self.putpixel(-y+x0, x+y0,char)
-      self.putpixel(-x+x0,-y+y0,char)
-      self.putpixel(-y+x0,-x+y0,char)
-      self.putpixel( x+x0,-y+y0,char)
-      self.putpixel( y+x0,-x+y0,char)
-      y+=1
-      if radiusError<0:
-        radiusError+=(2*y+1)
+    def plotpoints (xc,yc,x,y):
+      self.putpixel(xc+x, yc+y, char)
+      self.putpixel(xc-x, yc+y, char)
+      self.putpixel(xc+x, yc-y, char)
+      self.putpixel(xc-x, yc-y, char)
+
+    plotpoints(xc,yc,x,y)
+    #Region 1
+    p=round(b2-(a2*b)+(0.25*a2))
+    while px < py:
+      x+=1
+      px+=twob2
+      if p<0:
+        p+=b2+px;
       else:
-        x-=1
-        radiusError+=(2*(y-x)+1)
+        y-=1
+        py-=twoa2
+        p+=b2+px-py
+      plotpoints (xc,yc, x, y);
+    #Region 2
+    p=round(b2*(x+0.5)*(x+0.5)+a2*(y-1)*(y-1)-a2*b2)
+    while y>0:
+      y-=1
+      py-=twoa2
+      if p>0:
+        p+=a2-py;
+      else:
+        x+=1
+        px+=twob2
+        p+=a2-py+px
+      plotpoints(xc,yc,x,y)
 
   def text(self,x,y,char,string):
 

@@ -93,7 +93,7 @@ class context:
   def text(self,x,y,char,string):
 
     for i in range(7): #Height of the font
-      line="".join([eval("font."+letter+"[i]") for letter in string.lower().replace(" ","_").replace("4","D").replace("6","F")])
+      line="".join([eval("font."+letter+"[i]") for letter in string.lower().replace(" ","_").replace("2","B").replace("3","C").replace("4","D").replace("6","F").replace("7","G")])
       for j in range(79-x): #total space left
         try: 
           if line[j]=="#" and x+j>0: self.putpixel(x+j,y+i,char)

@@ -16,7 +16,7 @@ def loop(step):
   global stagestep
   global achistep
   # DANGER ZONE
-  ef.fire(c,step)
+  ef.fire(c)
   # ef.meatballs(c,step)
   # c.text(1,10,".","   TEST")
   # ef.starfield(c,step)

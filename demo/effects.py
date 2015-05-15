@@ -78,27 +78,28 @@ def euskallogo(context,logo,step):
       except: pass
 
 grayscale=[i for i in " `.:#"]
-firebase=[random.randrange(255) for i in range(80)]
-def fire(context,step):
+firebase=[128+random.randrange(128) for i in range(80)]
+def fire(context):
 
   global firebase
   newbase=[]
   for i in firebase:
-    addors=random.choice([0,1])
-    if addors: a=abs(i+math.floor(random.randrange(64)))%256
-    else:      a=abs(i-math.floor(random.randrange(64)))%256
+    aos=random.choice([0,1])
+    if aos: a=abs(i+math.floor(random.randrange(64)))
+    else:   a=abs(i-math.floor(random.randrange(32)))
+    a=255 if a>255 else 0 if a<0 else a
     newbase.append(a)
   previousline=newbase
   firebase=newbase
+
   for i in range(40):
     actualline=[]
     for j in range(80):
-      if j==0:   lvl=adjust((previousline[j]+previousline[j+1])/3)-3
-      elif j==79:lvl=adjust((previousline[j]+previousline[j-1])/3)-3
-      else:      lvl=adjust((previousline[j-1]+previousline[j]+previousline[j+1])/3)-7
+      lvl=adjust((previousline[j]+previousline[j+1])/3)-3 if j==0 else adjust((previousline[j]+previousline[j-1])/3)-3 if j==79 else adjust((previousline[j-1]+previousline[j]+previousline[j+1])/3)-7
+      if lvl<0:lvl=0
       actualline.append(lvl)
-      sign=grayscale[adjust(lvl/(255/3))]
-      if sign: context.putpixel(j,39-i,sign)
+      sign=grayscale[adjust(lvl/(255/5))]
+      context.putpixel(j,39-i,sign)
     previousline=actualline
 
 

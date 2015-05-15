@@ -77,5 +77,30 @@ def euskallogo(context,logo,step):
       try: context.grid[ni][nj]=j
       except: pass
 
+grayscale=[i for i in " `.:#"]
+firebase=[random.randrange(255) for i in range(80)]
+def fire(context,step):
+
+  global firebase
+  newbase=[]
+  for i in firebase:
+    addors=random.choice([0,1])
+    if addors: a=abs(i+math.floor(random.randrange(64)))%256
+    else:      a=abs(i-math.floor(random.randrange(64)))%256
+    newbase.append(a)
+  previousline=newbase
+  firebase=newbase
+  for i in range(40):
+    actualline=[]
+    for j in range(80):
+      if j==0:   lvl=adjust((previousline[j]+previousline[j+1])/3)-3
+      elif j==79:lvl=adjust((previousline[j]+previousline[j-1])/3)-3
+      else:      lvl=adjust((previousline[j-1]+previousline[j]+previousline[j+1])/3)-7
+      actualline.append(lvl)
+      sign=grayscale[adjust(lvl/(255/3))]
+      if sign: context.putpixel(j,39-i,sign)
+    previousline=actualline
+
+
 if __name__=="__main__":
   pass

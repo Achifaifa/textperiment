@@ -48,15 +48,8 @@ class context:
     self.line(x,y+ysize,x+xsize+1,y+ysize,char)
 
   def circle(self,xc,yc,b,char):
-    a=b*2
-    a2=a*a
-    b2=b*b
-    twoa2=2*a2
-    twob2=2*b2
-    x=0
-    y=b
-    px=0
-    py=twoa2*y
+
+    a=b*2;a2=a*a;b2=b*b;twoa2=2*a2;twob2=2*b2;x=0;y=b;px=0;py=twoa2*y
 
     def plotpoints (xc,yc,x,y):
       self.putpixel(xc+x, yc+y, char)
@@ -65,25 +58,21 @@ class context:
       self.putpixel(xc-x, yc-y, char)
 
     plotpoints(xc,yc,x,y)
-    #Region 1
     p=round(b2-(a2*b)+(0.25*a2))
-    while px < py:
+    while px<py:
       x+=1
       px+=twob2
-      if p<0:
-        p+=b2+px;
+      if p<0: p+=b2+px
       else:
         y-=1
         py-=twoa2
         p+=b2+px-py
-      plotpoints (xc,yc, x, y);
-    #Region 2
+      plotpoints (xc,yc, x, y)
     p=round(b2*(x+0.5)*(x+0.5)+a2*(y-1)*(y-1)-a2*b2)
     while y>0:
       y-=1
       py-=twoa2
-      if p>0:
-        p+=a2-py;
+      if p>0: p+=a2-py
       else:
         x+=1
         px+=twob2

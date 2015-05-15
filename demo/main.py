@@ -10,11 +10,13 @@ beat=0
 cycle=subcycle=1
 
 stagestep=achistep=0
+test=1
 def loop(step):
 
   global stagestep
   global achistep
   # DANGER ZONE
+  ef.fire(c,step)
   # ef.meatballs(c,step)
   # c.text(1,10,".","   TEST")
   # ef.starfield(c,step)
@@ -23,21 +25,22 @@ def loop(step):
   # ef.euskallogo(c,vscroll,int(math.floor(step/4)))
   # ef.scroll(c,"TEST",5,"#",(step*2)%150)
   # DEMO ZONE
-  if beat<40:
-    ef.euskallogo(c,vscroll,int(math.floor(step/3)))
-    if beat<16: 
-      ef.scroll(c,"EUSKAL ENCOUNTER 23",5,"#",step)
-    elif beat<24: 
-      ef.scroll(c,"STAGE7",5,"`",stagestep)
-      stagestep+=1
-    elif beat<34: 
-      ef.scroll(c,"ACHIFAIFA",5,"*",achistep)
-      achistep+=1
-  elif beat<235:
-    ef.meatballs(c,step)
-    if beat%2==0: c.text(10,10,".","UNTZ")
-    else: c.text(40,30,".","UNTZ")
-  if beat==235:1/0
+  if not test:
+    if beat<40:
+      ef.euskallogo(c,vscroll,int(math.floor(step/3)))
+      if beat<16: 
+        ef.scroll(c,"EUSKAL ENCOUNTER 23",5,"#",step)
+      elif beat<24: 
+        ef.scroll(c,"STAGE7",5,"`",stagestep)
+        stagestep+=1
+      elif beat<34: 
+        ef.scroll(c,"ACHIFAIFA",5,"*",achistep)
+        achistep+=1
+    elif beat<235:
+      ef.meatballs(c,step)
+      if beat%2==0: c.text(10,10,".","UNTZ")
+      else: c.text(40,30,".","UNTZ")
+    if beat==235:1/0
 
 def updatebeat():
   

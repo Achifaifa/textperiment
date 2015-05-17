@@ -84,9 +84,8 @@ def fire(context):
   global firebase
   newbase=[]
   for i in firebase:
-    aos=random.choice([0,1])
-    if aos: a=abs(i+math.floor(random.randrange(64)))
-    else:   a=abs(i-math.floor(random.randrange(32)))
+    if random.choice([0,1]): a=abs(i+math.floor(random.randrange(64)))
+    else: a=abs(i-math.floor(random.randrange(32)))
     a=255 if a>255 else 0 if a<0 else a
     newbase.append(a)
   previousline=newbase
@@ -101,7 +100,3 @@ def fire(context):
       sign=grayscale[adjust(lvl/(255/5))]
       context.putpixel(j,39-i,sign)
     previousline=actualline
-
-
-if __name__=="__main__":
-  pass

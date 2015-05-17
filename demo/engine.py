@@ -33,12 +33,10 @@ class context:
       for i in range(abs(deltay)): self.putpixel(x0, y0+i*sign(deltay), char) 
     elif abs(deltax)>abs(deltay):
       if x0>x1: x0,y0,x1,y1=x1,y1,x0,y0
-      for i in range(abs(deltax)): 
-          self.putpixel(x0+i, y0+deltay*i/deltax, char)
+      for i in range(abs(deltax)): self.putpixel(x0+i, y0+deltay*i/deltax, char)
     else:
       if y0>y1: x0,y0,x1,y1=x1,y1,x0,y0
-      for i in range(abs(deltay)): 
-          self.putpixel(x0+deltax*i/deltay, y0+i, char)
+      for i in range(abs(deltay)): self.putpixel(x0+deltax*i/deltay, y0+i, char)
 
   def rectangle(self,x,y,xsize,ysize,char):
 
@@ -91,6 +89,3 @@ class context:
   def clear(self):
 
     self.grid=[[" " for i in range(self.xsize)] for i in range(self.ysize)]
-
-if __name__=="__main__":
-  pass

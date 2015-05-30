@@ -100,3 +100,17 @@ def fire(context):
       sign=grayscale[adjust(lvl/(255/5))]
       context.putpixel(j,39-i,sign)
     previousline=actualline
+
+parafill={"clouds":"CLOUDS"*20,"mountains":"MOUNTAINS"*12,"grass":"GRASS"*24,"near":"NEAR"*30}
+def parallax(context, step):
+
+  for key,value in parafill.iteritems():
+    if key=="clouds":     y=0;rang=10;div=16
+    elif key=="mountains":y=10;rang=10;div=8
+    elif key=="grass":    y=20;rang=14;div=4
+    elif key=="near":     y=34;rang=6;div=1
+    for i in range(rang):
+      try:
+        context.smalltext(1,y+i,value[(step/div)%(6):])
+      except: pass
+

@@ -86,6 +86,11 @@ class context:
           if line[j]=="#" and x+j>0: self.putpixel(x+j,y+i,char)
         except: pass
 
+  def smalltext(self,x,y,string):
+
+    for i in range(len(string)):
+      self.putpixel(x+i,y,string[i])
+
   def clear(self):
 
     self.grid=[[" " for i in range(self.xsize)] for i in range(self.ysize)]

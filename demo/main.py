@@ -16,13 +16,14 @@ def loop(step):
   global stagestep
   global achistep
   # DANGER ZONE
-  # ef.fire(c)
   # ef.meatballs(c,step)
   # c.text(1,10,".","   TEST")
   # ef.starfield(c,step)
   # ef.threedcube(c,step/3)
   # c.circle(40,20,10,"0")
   # ef.euskallogo(c,vscroll,int(math.floor(step/4)))
+  # ef.fire(c)  
+  ef.parallax(c,cycle)
   # ef.scroll(c,"TEST",5,"#",(step*2)%150)
   # DEMO ZONE
   if not test:

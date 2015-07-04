@@ -10,7 +10,7 @@ beat=0
 cycle=subcycle=1
 
 stagestep=achistep=0
-test=1
+test=0
 def loop(step):
 
   global stagestep
@@ -19,12 +19,12 @@ def loop(step):
   # ef.meatballs(c,step)
   # c.text(1,10,".","   TEST")
   # ef.starfield(c,step)
-  # ef.threedcube(c,step/3)
+  # ef.threedcube(c,step/2)
   # c.circle(40,20,10,"0")
   # ef.euskallogo(c,vscroll,int(math.floor(step/4)))
   # ef.fire(c)  
-  ef.parallax(c,cycle)
-  # ef.scroll(c,"TEST",5,"#",(step*2)%150)
+  # ef.parallax(c,cycle)
+  # ef.scroll(c,"TEST",5,"#",(step)%150)
   # DEMO ZONE
   if not test:
     if beat<40:
@@ -82,7 +82,7 @@ def main():
     loop(cycle)
     cycle+=1
     c.draw()
-    time.sleep(1/30)
+    time.sleep(1/15)#30
 
 if __name__=="__main__":
   vscroll=decodescroll()

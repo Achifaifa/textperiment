@@ -105,12 +105,11 @@ parafill={"clouds":"CLOUDS"*20,"mountains":"MOUNTAINS"*12,"grass":"GRASS"*24,"ne
 def parallax(context, step):
 
   for key,value in parafill.iteritems():
-    if key=="clouds":     y=0;rang=10;div=32;mod=6
+    if key=="clouds":y=0;rang=10;div=32;mod=6
     elif key=="mountains":y=10;rang=10;div=16;mod=9
-    elif key=="grass":    y=20;rang=14;div=4;mod=5
-    elif key=="near":     y=34;rang=6;div=1;mod=4
+    elif key=="grass":y=20;rang=14;div=4;mod=5
+    elif key=="near":y=34;rang=6;div=1;mod=4
     for i in range(rang):
-      try:
-        context.smalltext(1,y+i,value[(step/div)%mod:])
+      try: context.smalltext(1,y+i,value[(step/div)%(mod):])
       except: pass
 

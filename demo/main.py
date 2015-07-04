@@ -5,6 +5,7 @@ import effects as ef, engine
 adjust=lambda x: int(math.floor(x))
 c=engine.context()
 lastdate=time.time()*1000
+startdate=time.time()*1000
 beatpool=0
 beat=0
 cycle=subcycle=1
@@ -45,13 +46,15 @@ def loop(step):
 
 def updatebeat():
   
-  global lastdate,beatpool,beat
-  utime=time.time()*1000;
-  beatpool=beatpool+(utime-lastdate);
-  lastdate=utime;
-  if beatpool>429:
-    beatpool=0;
-    beat=beat+1;
+  #global lastdate,beatpool,beat
+  global beat
+  beat=adjust((time.time()*1000-startdate)/326)
+  # utime=time.time()*1000;
+  # beatpool=beatpool+(utime-lastdate);
+  # lastdate=utime;
+  # if beatpool>429:
+  #   beatpool=0;
+  #   beat=beat+1;
   # Remove this for release :D
   print beat,"/",cycle,"/",subcycle
   return beat
@@ -80,7 +83,8 @@ def main():
     c.clear()
     beat=updatebeat()
     loop(cycle)
-    cycle+=1
+    #cycle+=1
+    cycle=adjust((time.time()*1000-startdate)/20)
     c.draw()
     time.sleep(1/15)#30
 

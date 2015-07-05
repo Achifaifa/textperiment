@@ -1,6 +1,17 @@
 import math, random
 
 adjust=lambda x: int(math.floor(x))
+NRM="\x1B[0m "
+RED="\x1B[31m"
+GRN="\x1B[32m"
+YEL="\x1B[33m"
+BLU="\x1B[34m"
+MAG="\x1B[35m"
+CYN="\x1B[36m"
+WHT="\x1B[37m"
+
+def transition(context,step):
+  context.smalltext(2,2,"%sTEST%s"%(RED,NRM))
 
 meatt=1.4
 meatgoo=0.95

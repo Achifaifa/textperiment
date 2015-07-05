@@ -11,7 +11,7 @@ beat=0
 cycle=subcycle=1
 
 stagestep=achistep=0
-test=0
+test=1
 def loop(step):
 
   global stagestep
@@ -21,6 +21,7 @@ def loop(step):
   # c.text(1,10,".","   TEST")
   # ef.starfield(c,step)
   # ef.threedcube(c,step/2)
+  ef.transition(c,step)
   # c.circle(40,20,10,"0")
   # ef.euskallogo(c,vscroll,int(math.floor(step/4)))
   # ef.fire(c)  
@@ -28,14 +29,14 @@ def loop(step):
   # ef.scroll(c,"TEST",5,"#",(step)%150)
   # DEMO ZONE
   if not test:
-    if beat<40:
+    if beat<49:
       ef.euskallogo(c,vscroll,int(math.floor(step/3)))
-      if beat<16: 
+      if beat<20: 
         ef.scroll(c,"EUSKAL ENCOUNTER 23",5,"#",step)
-      elif beat<24: 
+      elif beat<33: 
         ef.scroll(c,"STAGE7",5,"`",stagestep)
         stagestep+=1
-      elif beat<34: 
+      else: 
         ef.scroll(c,"ACHIFAIFA",5,"*",achistep)
         achistep+=1
     elif beat<235:
@@ -77,14 +78,14 @@ def decodescroll():
 
 def main():
   global cycle
-  os.system("./midi2beep.py -o music.sh music.mid")
+  #os.system("./midi2beep.py -o music.sh music.mid")
   subprocess.Popen(["bash","music.sh",])
   while 1:
     c.clear()
     beat=updatebeat()
     loop(cycle)
     #cycle+=1
-    cycle=adjust((time.time()*1000-startdate)/20)
+    cycle=adjust((time.time()*1000-startdate)/25)
     c.draw()
     time.sleep(1/15)#30
 

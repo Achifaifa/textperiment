@@ -9,9 +9,9 @@ startdate=time.time()*1000
 beatpool=0
 beat=0
 cycle=subcycle=1
-
 stagestep=achistep=0
-test=1
+test=0
+
 def loop(step):
 
   global stagestep
@@ -21,7 +21,7 @@ def loop(step):
   # c.text(1,10,".","   TEST")
   # ef.starfield(c,step)
   # ef.threedcube(c,step/2)
-  ef.transition(c,step)
+  # ef.transition(c,step)
   # c.circle(40,20,10,"0")
   # ef.euskallogo(c,vscroll,int(math.floor(step/4)))
   # ef.fire(c)  
@@ -33,7 +33,7 @@ def loop(step):
       ef.euskallogo(c,vscroll,int(math.floor(step/3)))
       if beat<20: 
         ef.scroll(c,"EUSKAL ENCOUNTER 23",5,"#",step)
-      elif beat<33: 
+      elif beat<30: 
         ef.scroll(c,"STAGE7",5,"`",stagestep)
         stagestep+=1
       else: 

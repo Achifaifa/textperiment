@@ -1,18 +1,14 @@
 import math, random
 
 adjust=lambda x: int(math.floor(x))
-
-plasmapalette=" .:-=+*#%@@%#*+=-:. "
-def plasma(context,step):
-  for indexi,i in enumerate(context.grid):
-    for indexj,j in enumerate(i):
-      context.putpixel(indexj,indexi,plasmapalette[adjust(((20+10*math.sin(indexi/4.14)+10*math.sin(indexj/4.14))/2)+(step/4))%20 ])
-
-copperpalette=" `.:-=*#*=-.` "
-def copperbars(context,step):
-  for indexi,i in enumerate(context.grid):
-    for indexj,j in enumerate(i):
-      context.putpixel(indexj,indexi,copperpalette[adjust((6+3*math.sin(indexi+step/60.5)+(step/10.0))%14)])
+# NRM="\x1B[0m "
+# RED="\x1B[31m"
+# GRN="\x1B[32m"
+# YEL="\x1B[33m"
+# BLU="\x1B[34m"
+# MAG="\x1B[35m"
+# CYN="\x1B[36m"
+# WHT="\x1B[37m"
 
 meatt=1.4
 meatgoo=0.95
@@ -24,7 +20,9 @@ def meatballs(context,step):
   mbC=[40+math.sin((meatang*2)+100)*35,20+math.cos(meatang+50)*15]
   for i in range(40):
     for j in range(80):
-      if (5/math.pow(math.sqrt(math.pow(mbA[0]-j,2)+math.pow(mbA[1]-i,2)),meatgoo))+ (9/math.pow(math.sqrt(math.pow(mbB[0]-j,2)+math.pow(mbB[1]-i,2)),meatgoo))+ (3/math.pow(math.sqrt(math.pow(mbC[0]-j,2)+math.pow(mbC[1]-i,2)),meatgoo))>meatt:
+      if (5/math.pow(math.sqrt(math.pow(mbA[0]-j,2)+math.pow(mbA[1]-i,2)),meatgoo))+ \
+         (9/math.pow(math.sqrt(math.pow(mbB[0]-j,2)+math.pow(mbB[1]-i,2)),meatgoo))+ \
+         (3/math.pow(math.sqrt(math.pow(mbC[0]-j,2)+math.pow(mbC[1]-i,2)),meatgoo))>meatt:
         context.putpixel(j,i,"#")
 
 starsobj=[]
@@ -63,18 +61,18 @@ def threedcube(context,step):
   cubepoint6=[cubepoint2[0],cubepoint2[1]+10]
   cubepoint7=[cubepoint3[0],cubepoint3[1]+10]
   cubepoint8=[cubepoint4[0],cubepoint4[1]+10]
-  context.line(cubepoint1[0],cubepoint1[1],cubepoint2[0],cubepoint2[1],"*")
-  context.line(cubepoint2[0],cubepoint2[1],cubepoint3[0],cubepoint3[1],"*")
-  context.line(cubepoint3[0],cubepoint3[1],cubepoint4[0],cubepoint4[1],"*")
-  context.line(cubepoint4[0],cubepoint4[1],cubepoint1[0],cubepoint1[1],"*")
-  context.line(cubepoint5[0],cubepoint5[1],cubepoint6[0],cubepoint6[1],"*")
-  context.line(cubepoint6[0],cubepoint6[1],cubepoint7[0],cubepoint7[1],"*")
-  context.line(cubepoint7[0],cubepoint7[1],cubepoint8[0],cubepoint8[1],"*")
-  context.line(cubepoint8[0],cubepoint8[1],cubepoint5[0],cubepoint5[1],"*")
-  context.line(cubepoint1[0],cubepoint1[1],cubepoint5[0],cubepoint5[1],"*")
-  context.line(cubepoint2[0],cubepoint2[1],cubepoint6[0],cubepoint6[1],"*")
-  context.line(cubepoint3[0],cubepoint3[1],cubepoint7[0],cubepoint7[1],"*")
-  context.line(cubepoint4[0],cubepoint4[1],cubepoint8[0],cubepoint8[1],"*")
+  context.line(cubepoint1[0],cubepoint1[1],cubepoint2[0],cubepoint2[1],".")
+  context.line(cubepoint2[0],cubepoint2[1],cubepoint3[0],cubepoint3[1],".")
+  context.line(cubepoint3[0],cubepoint3[1],cubepoint4[0],cubepoint4[1],".")
+  context.line(cubepoint4[0],cubepoint4[1],cubepoint1[0],cubepoint1[1],".")
+  context.line(cubepoint5[0],cubepoint5[1],cubepoint6[0],cubepoint6[1],".")
+  context.line(cubepoint6[0],cubepoint6[1],cubepoint7[0],cubepoint7[1],".")
+  context.line(cubepoint7[0],cubepoint7[1],cubepoint8[0],cubepoint8[1],".")
+  context.line(cubepoint8[0],cubepoint8[1],cubepoint5[0],cubepoint5[1],".")
+  context.line(cubepoint1[0],cubepoint1[1],cubepoint5[0],cubepoint5[1],".")
+  context.line(cubepoint2[0],cubepoint2[1],cubepoint6[0],cubepoint6[1],".")
+  context.line(cubepoint3[0],cubepoint3[1],cubepoint7[0],cubepoint7[1],".")
+  context.line(cubepoint4[0],cubepoint4[1],cubepoint8[0],cubepoint8[1],".")
 
 def scroll(context,text,y,char,step):
 

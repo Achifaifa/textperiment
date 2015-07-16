@@ -4,62 +4,76 @@ import math, os, subprocess, sys, time, traceback
 import effects as ef, engine
 adjust=lambda x: int(math.floor(x))
 c=engine.context()
-lastdate=time.time()*1000
 startdate=time.time()*1000
-beatpool=0
 beat=0
-cycle=subcycle=1
-stagestep=achistep=0
+cycle=1
+auxstep1=auxstep2=0
 test=0
 
 def loop(step):
 
-  global stagestep
-  global achistep
+  global auxstep1,auxstep2
   # DANGER ZONE
-  # ef.meatballs(c,step)
-  # c.text(1,10,".","   TEST")
-  # ef.starfield(c,step)
-  # ef.threedcube(c,step/2)
+  # c.text(5,13,".","TEST")
   # ef.transition(c,step)
   # c.circle(40,20,10,"0")
-  # ef.euskallogo(c,vscroll,int(math.floor(step/4)))
   # ef.fire(c)  
-  # ef.parallax(c,cycle)
+  # ef.parallax(c,cycle*3)
   # ef.scroll(c,"TEST",5,"#",(step)%150)
-  # DEMO ZONE
+
   if not test:
-    if beat<49:
+    # Intro
+    if beat<47:
       ef.euskallogo(c,vscroll,int(math.floor(step/3)))
       if beat<20: 
         ef.scroll(c,"EUSKAL ENCOUNTER 23",5,"#",step)
       elif beat<30: 
-        ef.scroll(c,"STAGE7",5,"`",stagestep)
-        stagestep+=1
+        ef.scroll(c,"STAGE7",5,"`",auxstep1)
+        auxstep1+=1
       else: 
-        ef.scroll(c,"ACHIFAIFA",5,"*",achistep)
-        achistep+=1
-    elif beat<235:
+        ef.scroll(c,"ACHIFAIFA",5,"`",auxstep2)
+        auxstep2+=1
+    # Presentation
+    elif beat<79:
+      ef.copperbars(c,step)
+      c.text(10,3,"#","PRESENT")
+      if beat>54:
+        c.text(3,13,"#","TEXT")
+        c.text(13,23,"#","PERIMENT")
+      if beat>60: 
+        if beat==61: auxstep1=0
+        ef.scroll(c,"A REALTIME ASCII INTRO",32,"#",auxstep1*3)
+        auxstep1+=1
+    # EF1
+    elif beat<110:
+      if beat==79: auxstep1=1
+      ef.starfield(c,auxstep1*3)
+      ef.scroll(c,"you cant use python they said",32,"#",auxstep1*2)
+      auxstep1+=1
+      #95
+    # EF2
+    elif beat<141:
+      if beat==110: auxstep1=0
       ef.meatballs(c,step)
-      if beat%2==0: c.text(10,10,".","UNTZ")
-      else: c.text(40,30,".","UNTZ")
-    if beat==235:1/0
-
-def updatebeat():
-  
-  #global lastdate,beatpool,beat
-  global beat
-  beat=adjust((time.time()*1000-startdate)/326)
-  # utime=time.time()*1000;
-  # beatpool=beatpool+(utime-lastdate);
-  # lastdate=utime;
-  # if beatpool>429:
-  #   beatpool=0;
-  #   beat=beat+1;
-  # Remove this for release :D
-  print beat,"/",cycle,"/",subcycle
-  return beat
-
+      ef.scroll(c,"you cant fit it in 64k they said",32,"*",auxstep1*3)
+      auxstep1+=1
+      #110
+    # Oh noes...
+    elif beat<157:
+      if beat==141: auxstep1=0
+      ef.threedcube(c,step/2)
+      c.text(7,4,"#","oh noes")
+      ef.scroll(c,"what can we do",32,"#",auxstep1)
+      auxstep1+=1
+    # Aha
+    elif beat<173:
+      if beat==157: auxstep1=0
+      ef.parallax(c,step*3)
+      ef.scroll(c,"to the batcave",32,"#",auxstep1*2)
+      auxstep1+=1
+    elif beat<300:
+      ef.plasma(c,step)
+    
 def decode(string):
   counter="";out=""
   for i in string:
@@ -77,14 +91,14 @@ def decodescroll():
   with open("./finalscroll","r") as rles: return rles.readlines()
 
 def main():
-  global cycle
-  #os.system("./midi2beep.py -o music.sh music.mid")
+  global cycle, beat
+  os.system("./midi2beep.py -o music.sh music.mid")
   subprocess.Popen(["bash","music.sh",])
   while 1:
     c.clear()
-    beat=updatebeat()
+    beat=adjust((time.time()*1000-startdate)/326)
+    print beat,"/",cycle
     loop(cycle)
-    #cycle+=1
     cycle=adjust((time.time()*1000-startdate)/25)
     c.draw()
     time.sleep(1/15)#30

@@ -14,7 +14,6 @@ def loop(step):
 
   global auxstep1,auxstep2
   # DANGER ZONE
-  # c.text(5,13,".","TEST")
   # ef.transition(c,step)
   # c.circle(40,20,10,"0")
   # ef.fire(c)  
@@ -46,20 +45,18 @@ def loop(step):
         auxstep1+=1
     # EF1
     elif beat<110:
-      if beat==79: auxstep1=1
-      ef.starfield(c,auxstep1*3)
-      ef.scroll(c,"you cant use python they said",32,"#",auxstep1*2)
+      if beat==79: auxstep1=0
+      ef.starfield(c,auxstep1*2)
+      ef.scroll(c,"you cant use python they said",32,"#",auxstep1)
       auxstep1+=1
-      #95
     # EF2
     elif beat<141:
       if beat==110: auxstep1=0
       ef.meatballs(c,step)
       ef.scroll(c,"you cant fit it in 64k they said",32,"*",auxstep1*3)
       auxstep1+=1
-      #110
     # Oh noes...
-    elif beat<157:
+    elif beat<156:
       if beat==141: auxstep1=0
       ef.threedcube(c,step/2)
       c.text(7,4,"#","oh noes")
@@ -67,12 +64,25 @@ def loop(step):
       auxstep1+=1
     # Aha
     elif beat<173:
-      if beat==157: auxstep1=0
+      if beat==156: auxstep1=0
       ef.parallax(c,step*3)
       ef.scroll(c,"to the batcave",32,"#",auxstep1*2)
       auxstep1+=1
-    elif beat<300:
+    elif beat<190:
       ef.plasma(c,step)
+    elif beat<205:
+      c.text(7,4,"#","a")
+    elif beat<220:
+      c.text(7,4,"#","b")
+    elif beat<235:
+      c.text(7,4,"#","c")
+    elif beat<250:
+      c.text(7,4,"#","d")
+    elif beat<266:
+      c.text(7,4,"#","e")
+    else:
+      c.text(7,4,"#","f")
+
     
 def decode(string):
   counter="";out=""

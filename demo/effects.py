@@ -46,8 +46,8 @@ def starfield(context,step):
       starobj["dir"]=random.random()*6.28;
       starobj["step"]=2
   global starsobj
-  if step==1:
-    for i in range(20): starsobj.append({"speed":1+random.randrange(10),"dir":random.random()*6.28,"step":3})
+  if step==0:
+    for i in range(15): starsobj.append({"speed":1+random.randrange(10),"dir":random.random()*6.28,"step":3})
   for i in starsobj: movestar(i)
 
 def threedcube(context,step):

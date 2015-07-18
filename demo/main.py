@@ -68,20 +68,34 @@ def loop(step):
       ef.parallax(c,step*3)
       ef.scroll(c,"to the batcave",32,"#",auxstep1*2)
       auxstep1+=1
-    elif beat<190:
+    elif beat<189:
       ef.plasma(c,step)
     elif beat<205:
-      c.text(7,4,"#","a")
+      if beat==189: auxstep1=0
+      ef.plasma(c,step-auxstep1)
+      auxstep1+=5
     elif beat<220:
-      c.text(7,4,"#","b")
-    elif beat<235:
-      c.text(7,4,"#","c")
+      c.text(2,4,"#","after much")
+      c.text(2,12,"#","time")
+    elif beat<236:
+      c.text(7,4,"#","and")
+      c.text(2,12,"#","headaches")
     elif beat<250:
-      c.text(7,4,"#","d")
+      c.text(7,4,"#","its ready")
     elif beat<266:
-      c.text(7,4,"#","e")
-    else:
-      c.text(7,4,"#","f")
+      c.text(7,4,"#","behold")
+    elif beat<282:
+      c.text(1,4,"#","mwahahahahahahahahah")
+    elif beat<298:
+      c.text(5,4,"#","brilliant")
+    elif beat<314:
+      c.text(7,4,"#", "the compo")
+      c.text(7,12,"#"," is ours")
+    elif beat<329:
+      c.text(7,4,"#","radar")
+    elif beat<402:
+      c.text(9,4,"#","credits")
+    else: 1/0
 
     
 def decode(string):
@@ -102,6 +116,7 @@ def decodescroll():
 
 def main():
   global cycle, beat
+  os.system('clear')
   os.system("./midi2beep.py -o music.sh music.mid")
   subprocess.Popen(["bash","music.sh",])
   while 1:

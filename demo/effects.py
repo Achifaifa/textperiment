@@ -53,7 +53,7 @@ def starfield(context,step):
 def threedcube(context,step):
 
   rotcubex=40;
-  rotcubey=20;
+  rotcubey=23;
   rotcubes=10;
   cubepoint1=[adjust(rotcubex+math.cos(step*0.035)*15),       adjust(rotcubey-rotcubes*0.6+math.sin(step*0.035)*3)      ]
   cubepoint2=[adjust(rotcubex+math.cos((step+45)*0.035)*15),  adjust(rotcubey-rotcubes*0.6+math.sin((step+45)*0.035)*3) ]

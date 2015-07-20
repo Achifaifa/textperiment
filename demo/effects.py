@@ -10,14 +10,15 @@ def floppyrainbow(context, floppy, step):
 
 def laugh(context, frame):
   for i in [z for z in range(len(frame)) if z%2==0]:
-    try: context.line(frame[i],frame[i+1],frame[i+2],frame[i+3],".")
+    try: context.line(frame[i],frame[i+1],frame[i+2],frame[i+3],"*")
     except IndexError: pass
 
-plasmapalette=" .:-=+*#%@@%#*+=-:. "
+pbase=[" ","\033[31m.","\033[31m:","\033[32m-","\033[32m=","\033[33m+","\033[33m*","\033[34m#","\033[35m%","\033[36m@"]
+plasmapalette=pbase+pbase[::-1]
 def plasma(context,step):
   for indexi,i in enumerate(context.grid):
     for indexj,j in enumerate(i):
-      context.putpixel(indexj,indexi,plasmapalette[adjust(((20+10*math.sin(indexi/4.14)+10*math.sin(indexj/4.14))/2)+(step/4))%20 ])
+      context.putpixel(indexj,indexi,plasmapalette[adjust(((20+10*math.sin(indexi/4.14)+10*math.sin(indexj/4.14))/2)+(step/4))%20]+"\033[0m")
 
 copperpalette=" `.:-=*#*=-.` "
 def copperbars(context,step):
@@ -30,8 +31,8 @@ def moire(context,step):
   centera=[40+math.cos(moivar*5)*35,20+math.sin(moivar*2)*15]
   centerb=[40+math.sin(moivar*3)*35,20+math.cos(moivar*4)*15]
   for i in range(20):
-    context.circle(centera[0],centera[1],3*i,"*")
-    context.circle(centerb[0],centerb[1],3*i,"*")
+    context.circle(centera[0],centera[1],3*i,"\033[32m*\033[0m")
+    context.circle(centerb[0],centerb[1],3*i,"\033[31m*\033[0m")
 
 meatt=1.4
 meatgoo=0.95
@@ -106,7 +107,7 @@ def euskallogo(context,logo,step):
       try: context.grid[ni][nj]=j
       except: pass
 
-grayscale=[i for i in " `.:#"]
+grayscale=[" ","\033[33;2m`","\033[33;2m.","\033[31m:","\033[31;1m#"]
 firebase=[128+random.randrange(128) for i in range(80)]
 def fire(context):
 
@@ -127,7 +128,7 @@ def fire(context):
       if lvl<0:lvl=0
       actualline.append(lvl)
       sign=grayscale[adjust(lvl/(255/5))]
-      context.putpixel(j,39-i,sign)
+      context.putpixel(j,39-i,sign+"\033[0m")
     previousline=actualline
 
 permabase=[random.choice([" ","#"])for i in range(80)]

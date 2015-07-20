@@ -14,11 +14,6 @@ def loop(step):
 
   global auxstep1,auxstep2
   # DANGER ZONE
-  # ef.transition(c,step)
-  # c.circle(40,20,10,"0")
-  # ef.fire(c)  
-  # ef.parallax(c,cycle*3)
-  # ef.scroll(c,"TEST",5,"#",(step)%150)
 
   if not test:
     # Intro
@@ -43,58 +38,57 @@ def loop(step):
         if beat==61: auxstep1=0
         ef.scroll(c,"A REALTIME ASCII INTRO",32,"#",auxstep1*3)
         auxstep1+=1
-    # EF1
     elif beat<110:
       if beat==79: auxstep1=0
       ef.starfield(c,auxstep1*2)
-      ef.scroll(c,"you cant use python they said",32,"#",auxstep1)
+      ef.scroll(c,"you cant use python they say",32,"#",auxstep1)
       auxstep1+=1
-    # EF2
     elif beat<141:
       if beat==110: auxstep1=0
       ef.meatballs(c,step)
-      ef.scroll(c,"you cant fit it in 64k they said",32,"*",auxstep1*3)
+      ef.scroll(c,"you cant fit it in 64k they say",32,"*",auxstep1*3)
       auxstep1+=1
-    # Oh noes...
     elif beat<156:
       if beat==141: auxstep1=0
       ef.threedcube(c,step/2)
       c.text(7,4,"#","oh noes")
       ef.scroll(c,"what can we do",32,"#",auxstep1)
       auxstep1+=1
-    # Aha
     elif beat<173:
       if beat==156: auxstep1=0
       ef.parallax(c,step*3)
-      ef.scroll(c,"to the batcave",32,"#",auxstep1*2)
-      auxstep1+=1
+      ef.scroll(c,"to the batcave",32," ",auxstep1)
+      auxstep1+=3
     elif beat<189:
       ef.plasma(c,step)
     elif beat<205:
-      if beat==189: auxstep1=0
-      ef.plasma(c,step-auxstep1)
-      auxstep1+=5
+      ef.moire(c,step)
     elif beat<220:
       c.text(2,4,"#","after much")
       c.text(2,12,"#","time")
     elif beat<236:
-      c.text(7,4,"#","and")
-      c.text(2,12,"#","headaches")
-    elif beat<250:
+      ef.automaton(c,step)
+      c.text(7,4,"x","and")
+      c.text(2,12,"x","headaches")
+    elif beat<251:
       c.text(7,4,"#","its ready")
     elif beat<266:
+      ef.floppyrainbow(c,floppy,step)
       c.text(7,4,"#","behold")
     elif beat<282:
-      c.text(1,4,"#","mwahahahahahahahahah")
+      c.text(1,2,"#","mwahahahahahahahahah")
     elif beat<298:
       c.text(5,4,"#","brilliant")
     elif beat<314:
-      c.text(7,4,"#", "the compo")
-      c.text(7,12,"#"," is ours")
+      ef.fire(c)
+      c.text(4,3,"#", "the compo")
+      c.text(4,11,"#"," is ours")
     elif beat<329:
       c.text(7,4,"#","radar")
     elif beat<402:
       c.text(9,4,"#","credits")
+    elif beat<450: 
+      ef.euskallogo(c,vscroll,55)
     else: 1/0
 
     
@@ -108,11 +102,10 @@ def decode(string):
       counter=""
   return out
 
-def decodescroll():
-  with open("./rlescroll","r") as scrollin:
-    with open("./finalscroll","w+") as scrollout:
-      for line in scrollin: scrollout.write(decode(line.rstrip('\n'))+'\n')
-  with open("./finalscroll","r") as rles: return rles.readlines()
+def decodefile(path):
+
+  with open(path,"r") as rlein:
+    return [decode(line.rstrip('\n')) for line in rlein]
 
 def main():
   global cycle, beat
@@ -129,7 +122,8 @@ def main():
     time.sleep(1/15)#30
 
 if __name__=="__main__":
-  vscroll=decodescroll()
+  vscroll=decodefile("./rlescroll")
+  floppy=decodefile("./rlefloppy")
   try: main()
   except: 
     subprocess.call(["rm","music.sh","finalscroll"])

@@ -2,6 +2,12 @@ import math, random
 
 adjust=lambda x: int(math.floor(x))
 
+def floppyrainbow(context, floppy, step):
+  for i in range(20): context.drawang(40,20,50,(step+(3.14*i)/10))
+  for indexi,i in enumerate(floppy):
+    for indexj,j in enumerate(i):
+      context.putpixel(29+indexj,14+indexi,j)
+
 plasmapalette=" .:-=+*#%@@%#*+=-:. "
 def plasma(context,step):
   for indexi,i in enumerate(context.grid):
@@ -13,6 +19,14 @@ def copperbars(context,step):
   for indexi,i in enumerate(context.grid):
     for indexj,j in enumerate(i):
       context.putpixel(indexj,indexi,copperpalette[adjust((6+3*math.sin(indexi+step/60.5)+(step/10.0))%14)])
+
+def moire(context,step):
+  moivar=3.14*step/150;
+  centera=[40+math.cos(moivar*5)*35,20+math.sin(moivar*2)*15]
+  centerb=[40+math.sin(moivar*3)*35,20+math.cos(moivar*4)*15]
+  for i in range(20):
+    context.circle(centera[0],centera[1],3*i,"*")
+    context.circle(centerb[0],centerb[1],3*i,"*")
 
 meatt=1.4
 meatgoo=0.95
@@ -111,13 +125,37 @@ def fire(context):
       context.putpixel(j,39-i,sign)
     previousline=actualline
 
-parafill={"clouds":"CLOUDS"*20,"mountains":"MOUNTAINS"*12,"grass":"+= *="*24,"near":"   |"*30}
+permabase=[random.choice([" ","#"])for i in range(80)]
+autodir=1
+def automaton(context, step):
+
+  global permabase, autodir
+  automatonbase=permabase
+  for i in range(step%40):
+    newbase=[]
+    for j in range(80):
+      basecell=""
+      try: basecell+=automatonbase[j-1]
+      except IndexError: basecell+=" "
+      basecell+=automatonbase[j]
+      try: basecell+=automatonbase[j+1]
+      except IndexError: basecell+=" "
+      newcell="#" if basecell.count(" ")==2 or basecell.count("#")==2 else " "
+      newbase.append(newcell)
+      if autodir: context.putpixel(j,i,newcell)
+      else: context.putpixel(j,40-i,newcell)
+    automatonbase=newbase
+    if i==38: 
+      permabase=automatonbase
+      autodir=0 if autodir else 1
+
+parafill={"clouds":"CLOUDS"*20,"mountains":"MOUNTAINS"*12,"grass":"PARALLAX"*20,"near":"FTW!"*30}
 def parallax(context, step):
 
   for key,value in parafill.iteritems():
     if key=="clouds":y=0;rang=10;div=32;mod=6
     elif key=="mountains":y=10;rang=10;div=16;mod=9
-    elif key=="grass":y=20;rang=14;div=4;mod=5
+    elif key=="grass":y=20;rang=14;div=4;mod=8
     elif key=="near":y=34;rang=6;div=1;mod=4
     for i in range(rang):
       try: context.smalltext(1,y+i,value[(step/div)%(mod):])

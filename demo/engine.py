@@ -23,8 +23,9 @@ class context:
 
   def putpixel(self,x,y,char):
 
-    try:self.grid[adjust(y)][adjust(x)]=char
-    except:self.grid[y][x]=char
+    if x>=0 and y>=0:
+      try:self.grid[adjust(y)][adjust(x)]=char
+      except IndexError:pass
 
   def line(self,x0,y0,x1,y1,char):
     
@@ -37,6 +38,13 @@ class context:
     else:
       if y0>y1: x0,y0,x1,y1=x1,y1,x0,y0
       for i in range(abs(deltay)): self.putpixel(x0+deltax*i/deltay, y0+i, char)
+
+  def drawang(self,x,y,leng,ang):
+
+    xd=adjust(math.sin(ang)*leng)
+    yd=adjust(math.cos(ang)*leng)
+    self.line(x,y,x+xd,y+yd,"*");
+
 
   def rectangle(self,x,y,xsize,ysize,char):
 

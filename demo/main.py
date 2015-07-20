@@ -19,14 +19,14 @@ def loop(step):
     # Intro
     if beat<47:
       ef.euskallogo(c,vscroll,int(math.floor(step/3)))
-      if beat<20: 
+      if beat<18: 
         ef.scroll(c,"EUSKAL ENCOUNTER 23",5,"#",step)
       elif beat<30: 
-        ef.scroll(c,"STAGE7",5,"`",auxstep1)
-        auxstep1+=1
+        if beat==18: auxstep1=step
+        ef.scroll(c,"STAGE7",5,"`",step-auxstep1)
       else: 
-        ef.scroll(c,"ACHIFAIFA",5,"`",auxstep2)
-        auxstep2+=1
+        if beat==30: auxstep2=step
+        ef.scroll(c,"ACHIFAIFA",5,"`",step-auxstep2)
     # Presentation
     elif beat<79:
       ef.copperbars(c,step)
@@ -35,30 +35,25 @@ def loop(step):
         c.text(3,13,"#","TEXT")
         c.text(13,23,"#","PERIMENT")
       if beat>60: 
-        if beat==61: auxstep1=0
-        ef.scroll(c,"A REALTIME ASCII INTRO",32,"#",auxstep1*3)
-        auxstep1+=1
+        if beat==61: auxstep1=step
+        ef.scroll(c,"A REALTIME ASCII INTRO",32,"#",step-auxstep1)
     elif beat<110:
-      if beat==79: auxstep1=0
-      ef.starfield(c,auxstep1*2)
-      ef.scroll(c,"you cant use python they say",32,"#",auxstep1)
-      auxstep1+=1
+      if beat==79: auxstep1=step
+      ef.starfield(c,step-auxstep1)
+      ef.scroll(c,"you cant use python they say",32,"#",step-auxstep1)
     elif beat<141:
-      if beat==110: auxstep1=0
+      if beat==110: auxstep1=step
       ef.meatballs(c,step)
-      ef.scroll(c,"you cant fit it in 64k they say",32,"*",auxstep1*3)
-      auxstep1+=1
+      ef.scroll(c,"you cant fit it in 64k they say",32,"*",step-auxstep1)
     elif beat<156:
-      if beat==141: auxstep1=0
+      if beat==141: auxstep1=step
       ef.threedcube(c,step/2)
       c.text(7,4,"#","oh noes")
-      ef.scroll(c,"what can we do",32,"#",auxstep1)
-      auxstep1+=1
+      ef.scroll(c,"what can we do",32,"#",step-auxstep1)
     elif beat<173:
-      if beat==156: auxstep1=0
+      if beat==156: auxstep1=step
       ef.parallax(c,step*3)
-      ef.scroll(c,"to the batcave",32," ",auxstep1)
-      auxstep1+=3
+      ef.scroll(c,"to the batcave",32," ",step-auxstep1)
     elif beat<189:
       ef.plasma(c,step)
     elif beat<205:

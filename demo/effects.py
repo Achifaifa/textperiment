@@ -8,6 +8,11 @@ def floppyrainbow(context, floppy, step):
     for indexj,j in enumerate(i):
       context.putpixel(29+indexj,14+indexi,j)
 
+def laugh(context, frame):
+  for i in [z for z in range(len(frame)) if z%2==0]:
+    try: context.line(frame[i],frame[i+1],frame[i+2],frame[i+3],".")
+    except IndexError: pass
+
 plasmapalette=" .:-=+*#%@@%#*+=-:. "
 def plasma(context,step):
   for indexi,i in enumerate(context.grid):

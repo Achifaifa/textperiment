@@ -103,13 +103,8 @@ def scroll(context,text,y,char,step):
 
 def sinescroll(context,string,y,char,step):
 
-  x=81-step/2
-  for i in range(7): #Height of the font
-      line="".join([eval("font."+letter+"[i]") for letter in string.lower().replace(" ","_").replace("2","B").replace("3","C").replace("4","D").replace("6","F").replace("7","G")])
-      for j in range(79-x): #total space left
-        try: 
-          if line[j]=="#" and x+j>0: context.putpixel(x+j,y+i+3*math.sin((x+j)/3),char)
-        except IndexError: pass
+  for idxi,i in enumerate(string):
+    context.text((81-step/2)+8*idxi,y+2*math.sin((81-step/3)+(idxi+1)),char,i)
 
 def euskallogo(context,logo,step):
   

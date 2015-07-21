@@ -20,7 +20,7 @@ def loop(step):
 
   global auxstep1,auxstep2
   # DANGER ZONE
-  ef.sinescroll(c,"test",20,"#",step)
+  
 
   if not test:
     if beat<47:
@@ -97,7 +97,11 @@ def loop(step):
       c.text(7,4,"#","radar")
     # TO-DO
     elif beat<402:
-      c.text(9,4,"#","credits")
+      c.text(10,5,"#","greets")
+      ef.sinescroll(c,"marcan",20,"#",step)
+      ef.sinescroll(c,"bixo",30,"#",step-120)
+      ef.sinescroll(c,"soga",20,"#",step-200)
+      ef.sinescroll(c,"ekparty scene people",22,"#",step)
     elif beat<420: 
       ef.euskallogo(c,vscroll,55)
     else: 1/0

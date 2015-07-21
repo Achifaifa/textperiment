@@ -20,13 +20,11 @@ def loop(step):
 
   global auxstep1,auxstep2
   # DANGER ZONE
-  ef.fire(c)
-
+  ef.sinescroll(c,"test",20,"#",step)
 
   if not test:
-    # Intro
     if beat<47:
-      ef.euskallogo(c,vscroll,int(math.floor(step/3)))
+      ef.euskallogo(c,vscroll,adjust(step/3))
       if beat<18: 
         ef.scroll(c,"EUSKAL ENCOUNTER 23",5,"#",step)
       elif beat<30: 
@@ -35,7 +33,6 @@ def loop(step):
       else: 
         if beat==30: auxstep2=step
         ef.scroll(c,"ACHIFAIFA",5,"`",step-auxstep2)
-    # Presentation
     elif beat<79:
       ef.copperbars(c,step)
       c.text(10,3,"#","PRESENT")
@@ -44,7 +41,7 @@ def loop(step):
         c.text(13,23,"#","PERIMENT")
       if beat>60: 
         if beat==61: auxstep1=step
-        ef.scroll(c,"A REALTIME ASCII INTRO",32,"#",step-auxstep1)
+        ef.scroll(c,"A REALTIME ASCII INTRO",32,"#",(step-auxstep1)*2)
     elif beat<110:
       if beat==79: auxstep1=step
       ef.starfield(c,step-auxstep1)
@@ -66,6 +63,7 @@ def loop(step):
       ef.plasma(c,step)
     elif beat<205:
       ef.moire(c,step)
+    # TO-DO
     elif beat<220:
       c.text(2,4,"#","after much")
       c.text(2,12,"#","time")
@@ -73,28 +71,34 @@ def loop(step):
       ef.automaton(c,step)
       c.text(7,4,"x","and")
       c.text(2,12,"x","headaches")
+    # TO-DO
     elif beat<251:
       c.text(7,4,"#","its ready")
     elif beat<266:
       ef.floppyrainbow(c,floppy,step)
-      c.text(7,4,"#","behold")
+      c.text(16,4,"#","behold")
     elif beat<282:
       if beat==266:auxstep1=step
-      ef.laugh(c,testframe[beat%4])
+      ef.laugh(c,testframe[(step/5)%4])
       if not beat%4 and step%2: 
-        for i in rayframe: ef.laugh(c,i)
+        ef.laugh(c,rayframe[0])
+      if beat%4==1 and step%2:
+        ef.laugh(c,rayframe[1])
       ef.scroll(c,"mwahahahahahahahahahaha",3,"#",(step-auxstep1)*2)
+    # TO-DO
     elif beat<298:
       c.text(5,4,"#","brilliant")
     elif beat<314:
       ef.fire(c)
       c.text(4,3,"#", "the compo")
       c.text(4,11,"#"," is ours")
+    # TO-DO
     elif beat<329:
       c.text(7,4,"#","radar")
+    # TO-DO
     elif beat<402:
       c.text(9,4,"#","credits")
-    elif beat<450: 
+    elif beat<420: 
       ef.euskallogo(c,vscroll,55)
     else: 1/0
 
@@ -118,7 +122,7 @@ def main():
   global cycle, beat
   os.system('clear')
   os.system("./midi2beep.py -o music.sh music.mid")
-  subprocess.Popen(["bash","music.sh",])
+  # subprocess.Popen(["bash","music.sh",])
   while 1:
     c.clear()
     beat=adjust((time.time()*1000-startdate)/326)
@@ -126,14 +130,14 @@ def main():
     loop(cycle)
     cycle=adjust((time.time()*1000-startdate)/25)
     c.draw()
-    time.sleep(1/15)#30
+    time.sleep(1/30)#30
 
 if __name__=="__main__":
   vscroll=decodefile("./rlescroll")
   floppy=decodefile("./rlefloppy")
   try: main()
   except: 
-    subprocess.call(["rm","music.sh","finalscroll"])
+    subprocess.call(["rm","music.sh"])
     subprocess.call(["killall","bash"])
     os.system('clear')
     traceback.print_exc()

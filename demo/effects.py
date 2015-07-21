@@ -1,3 +1,4 @@
+import font
 import math, random
 
 adjust=lambda x: int(math.floor(x))
@@ -100,6 +101,16 @@ def scroll(context,text,y,char,step):
 
   context.text(81-step,y,char,text)
 
+def sinescroll(context,string,y,char,step):
+
+  x=81-step/2
+  for i in range(7): #Height of the font
+      line="".join([eval("font."+letter+"[i]") for letter in string.lower().replace(" ","_").replace("2","B").replace("3","C").replace("4","D").replace("6","F").replace("7","G")])
+      for j in range(79-x): #total space left
+        try: 
+          if line[j]=="#" and x+j>0: context.putpixel(x+j,y+i+3*math.sin((x+j)/3),char)
+        except IndexError: pass
+
 def euskallogo(context,logo,step):
   
   for ni,i in enumerate(logo[step:step+40]):
@@ -107,7 +118,7 @@ def euskallogo(context,logo,step):
       try: context.grid[ni][nj]=j
       except: pass
 
-grayscale=[" ","\033[33;2m`","\033[33;2m.","\033[31m:","\033[31;1m#"]
+grayscale=[" ","\033[33;2m`","\033[33m.",":","\033[31m#"]
 firebase=[128+random.randrange(128) for i in range(80)]
 def fire(context):
 

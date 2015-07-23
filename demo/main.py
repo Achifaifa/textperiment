@@ -8,7 +8,7 @@ startdate=time.time()*1000
 beat=0
 cycle=1
 auxstep1=auxstep2=0
-test=1
+test=0
 
 testframe=[[33,39,33,32,28,37,26,36,19,27,19,25,17,26,15,25,14,25,14,22,13,20,15,20,14,21,16,22,17,21,17,21,19,19,21,20,21,22,22,22,27,30,32,23,34,22,35,22,36,21,36,18,35,19,34,16,32,14,32,13,30,8,31,3,35,2,41,4,44,4,48,7,49,7,50,10,49,11,50,13,50,14,52,15,53,15,50,17,49,20,48,21,47,20,44,23,49,30,54,21,55,20,54,19,54,18,54,17,55,16,57,17,58,15,59,15,59,17,61,17,61,19,62,20,61,21,57,23,58,25,53,34,51,36,49,35,50,39],
 [33,39,33,33,29,38,26,36,19,28,20,26,18,26,17,25,16,25,15,21,17,20,16,22,19,22,19,21,21,20,23,21,23,23,24,23,28,30,33,23,36,23,37,21,37,20,35,20,34,17,33,15,33,15,30,8,32,3,37,3,43,5,45,5,47,7,48,8,50,8,52,11,50,13,51,14,51,16,53,15,54,17,50,18,48,19,48,18,47,20,47,21,48,22,47,23,46,24,50,30,54,23,55,22,53,20,54,18,56,19,56,18,58,16,59,17,59,18,60,18,61,19,60,21,61,21,58,23,57,25,58,27,53,36,51,37,50,36,50,39],
@@ -22,10 +22,10 @@ def loop(step):
   global auxstep1,auxstep2
   # DANGER ZONE
   # ef.mandelbrot(c,step)
-  ef.automaton(c,step)
+  # ef.automaton(c,step)
 
   if not test:
-    if beat<47:
+    if beat<46:
       ef.euskallogo(c,vscroll,adjust(step/3))
       if beat<18: 
         ef.scroll(c,"EUSKAL ENCOUNTER 23",5,"#",step)
@@ -35,7 +35,7 @@ def loop(step):
       else: 
         if beat==30: auxstep2=step
         ef.scroll(c,"ACHIFAIFA",5,"`",step-auxstep2)
-    elif beat<79:
+    elif beat<77:
       ef.copperbars(c,step)
       c.text(10,3,"#","PRESENT")
       if beat>54:
@@ -44,73 +44,67 @@ def loop(step):
       if beat>60: 
         if beat==61: auxstep1=step
         ef.scroll(c,"A REALTIME ASCII INTRO",32,"#",(step-auxstep1)*2)
-    elif beat<110:
-      if beat==79: auxstep1=step
+    elif beat<107:
+      if beat==77: auxstep1=step
       ef.starfield(c,step-auxstep1)
       ef.scroll(c,"you cant use python they say",32,"#",step-auxstep1)
-    elif beat<141:
-      if beat==110: auxstep1=step
+    elif beat<137:
+      if beat==107: auxstep1=step
       ef.meatballs(c,step)
       ef.scroll(c,"you cant fit it in 64k they say",32,"*",step-auxstep1)
-    elif beat<156:
-      if beat==141: auxstep1=step
+    elif beat<152:
+      if beat==137: auxstep1=step
       ef.threedcube(c,step/2)
       c.text(7,4,"#","oh noes")
       ef.scroll(c,"what can we do",32,"#",step-auxstep1)
-    elif beat<173:
-      if beat==156: auxstep1=step
+    elif beat<167:
+      if beat==152: auxstep1=step
       ef.parallax(c,step*3)
       ef.scroll(c,"to the batcave",32," ",step-auxstep1)
-    elif beat<189:
+    elif beat<185:
       ef.rotozoom(c,step)
-    elif beat<205:
+    elif beat<195:
       ef.moire(c,step)
-    elif beat<220:
+    elif beat<212:
       ef.plasma(c,step)
       c.text(2,4,"#","after")
       c.text(46,4,"#","much")    
       c.text(2,12,"#","time")
-    elif beat<236:
+    elif beat<227:
       ef.automaton(c,step)
       c.text(7,4,"x","and")
-      c.text(2,12,"x","headaches")
-    elif beat<251:
+      c.text(5,12,"x","headaches")
+    elif beat<242:
       ef.tunnel(c,step)
-      c.text(7,4,"#","its ready")
-    elif beat<266:
+      c.text(4,4,"#","its ready")
+    elif beat<256:
       ef.floppyrainbow(c,floppy,step)
       c.text(16,4,"#","behold")
-    elif beat<282:
-      if beat==266:auxstep1=step
+    elif beat<272:
+      if beat==256:auxstep1=step
       ef.laugh(c,testframe[(step/5)%4])
       if not beat%4 and step%2: 
         ef.laugh(c,rayframe[0])
       if beat%4==1 and step%2:
         ef.laugh(c,rayframe[1])
       ef.scroll(c,"mwahahahahahahahahahaha",3,"#",(step-auxstep1)*2)
-    elif beat<298:
+    elif beat<286:
       c.text(5,4,"#","brilliant")
     elif beat<314:
       ef.fire(c)
       c.text(4,3,"#", "the compo")
       c.text(4,11,"#"," is ours")
-    elif beat<329:
+    elif beat<301:
       c.text(7,4,"#","radar")
     elif beat<402:
+      if beat==329: auxstep1=step
       c.text(10,5,"#","greets")
-      ef.sinescroll(c,"marcan",20,"#",step)
-      if beat>334:
-        ef.sinescroll(c,"bixo",30,"#",step-120)
-      if beat>339:
-        ef.sinescroll(c,"soga",20,"#",step-200)
-      if beat>344:
-        ef.sinescroll(c,"freddy",30,"#",step-290)
-      if beat>349:
-        ef.sinescroll(c,"collapse",20,"#",step-380)
-      if beat>354:
-        ef.sinescroll(c,"software failure",30,"#",step-470)
-      if beat>364:
-        ef.sinescroll(c,"ekparty scene people",22,"#",step-600)
+      if beat<349:ef.sinescroll(c,"marcan",20,"#",step-auxstep1)
+      if 356>beat>334: ef.sinescroll(c,"bixo",30,"#",step-auxstep1-120)
+      if 364>beat>344:ef.sinescroll(c,"soga",20,"#",step-auxstep1-200)
+      if 374>beat>349:ef.sinescroll(c,"freddy",30,"#",step-auxstep1-290)
+      if 388>beat>359:ef.sinescroll(c,"collapse",20,"#",step-auxstep1-400)
+      if 401>beat>370:ef.sinescroll(c,"software failure",30,"#",step-auxstep1-540)
     elif beat<420: 
       ef.euskallogo(c,vscroll,55)
     else: 1/0
@@ -135,7 +129,7 @@ def main():
   global cycle, beat
   os.system('clear')
   os.system("./midi2beep.py -o music.sh music.mid")
-  #subprocess.Popen(["bash","music.sh",])
+  subprocess.Popen(["bash","music.sh",])
   while 1:
     c.clear()
     beat=adjust((time.time()*1000-startdate)/326)

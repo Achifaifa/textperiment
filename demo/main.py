@@ -20,7 +20,13 @@ def loop(step):
 
   global auxstep1,auxstep2
   # DANGER ZONE
-  
+  # ef.mandelbrot(c,step)
+  ef.tunnel(c,step)
+  # ef.laugh(c,testframe[(step/5)%4])
+  # if not beat%4 and step%2: 
+  #   ef.laugh(c,rayframe[0])
+  # if beat%4==1 and step%2:
+  #   ef.laugh(c,rayframe[1])
 
   if not test:
     if beat<47:
@@ -63,8 +69,8 @@ def loop(step):
       ef.plasma(c,step)
     elif beat<205:
       ef.moire(c,step)
-    # TO-DO
     elif beat<220:
+      ef.tunnel(c,step)
       c.text(2,4,"#","after much")
       c.text(2,12,"#","time")
     elif beat<236:
@@ -95,12 +101,13 @@ def loop(step):
     # TO-DO
     elif beat<329:
       c.text(7,4,"#","radar")
-    # TO-DO
     elif beat<402:
       c.text(10,5,"#","greets")
       ef.sinescroll(c,"marcan",20,"#",step)
       ef.sinescroll(c,"bixo",30,"#",step-120)
       ef.sinescroll(c,"soga",20,"#",step-200)
+      ef.sinescroll(c,"freddy",30,"#",step-290)
+      #collapse, software failure
       ef.sinescroll(c,"ekparty scene people",22,"#",step)
     elif beat<420: 
       ef.euskallogo(c,vscroll,55)

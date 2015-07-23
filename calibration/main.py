@@ -6,9 +6,8 @@ adjust=lambda x: int(math.floor(x))
 c=engine.context()
 startdate=time.time()*1000
 beat=0
-cycle=subcycle=1
+cycle=1
 test=0
-# test=1
 
 def loop(step):
 
@@ -16,19 +15,12 @@ def loop(step):
   if beat%2: c.text(4,10,".","UNTZ")
   else: c.text(15,30,".","UNTZ")
 
-def updatebeat():
-  global beat
-  beat=adjust((time.time()*1000-startdate)/326)
-  # Remove this for release :D
-  print beat,"/",cycle,"/",subcycle
-  return beat
-
 def main():
-  global cycle
+  global cycle,beat
   subprocess.Popen(["bash", "audio.sh"])
   while 1:
     c.clear()
-    beat=updatebeat()
+    beat=adjust((time.time()*1000-startdate)/326)
     loop(cycle)
     #cycle+=1
     cycle=adjust((time.time()*1000-startdate)/25)

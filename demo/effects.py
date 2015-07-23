@@ -132,6 +132,19 @@ def mandelbrot(context,step):
       colour=mandelpalette[iteration%10]
       context.putpixel(xo,yo,colour)
 
+def rotozoom(context,step):
+
+  x=adjust(40+15*math.sin(step/75.0))
+  y=adjust(20+15*math.cos(step/75.0))
+  ang=step/10.0
+  size=abs(15*math.sin(step/30.0))
+  xdiff=adjust(math.cos(ang)*size)
+  ydiff=adjust(math.sin(ang)*size)
+  for i in range(-4,4):
+    for j in range(-4,4):
+      context.drawcube(x+(i*xdiff),y+(i*ydiff),j*size,ang)
+      context.drawcube(x+(i*xdiff),y+(i*ydiff),-j*size,ang)
+
 tuncolours=["\033["+str(i)+"m" for i in range(30,37)]
 def tunnel(context,step):
 
@@ -165,29 +178,26 @@ def fire(context):
       context.putpixel(j,39-i,sign+"\033[0m")
     previousline=actualline
 
-permabase=[random.choice([" ","#"])for i in range(80)]
-autodir=1
+autodb=[[random.choice([" ","#"])for i in range(80)]]
 def automaton(context, step):
 
-  global permabase, autodir
-  automatonbase=permabase
-  for i in range(step%40):
-    newbase=[]
-    for j in range(80):
-      basecell=""
-      try: basecell+=automatonbase[j-1]
-      except IndexError: basecell+=" "
-      basecell+=automatonbase[j]
-      try: basecell+=automatonbase[j+1]
-      except IndexError: basecell+=" "
-      newcell="#" if basecell.count(" ")==2 or basecell.count("#")==2 else " "
-      newbase.append(newcell)
-      if autodir: context.putpixel(j,i,newcell)
-      else: context.putpixel(j,40-i,newcell)
-    automatonbase=newbase
-    if i==38: 
-      permabase=automatonbase
-      autodir=0 if autodir else 1
+  global autodb
+  newbase=[]
+  for j in range(80):
+    basecell=""
+    try: basecell+=autodb[-1][j-1]
+    except IndexError: basecell+=" "
+    basecell+=autodb[-1][j]
+    try: basecell+=autodb[-1][j+1]
+    except IndexError: basecell+=" "
+    newcell="#" if basecell.count(" ")==2 or basecell.count("#")==2 else " "
+    colour=["\033[30m","\033[31m","\033[32m","\033[33m"][basecell.count("#")]
+    newcell=colour+newcell+"\033[0m"
+    newbase.append(newcell)  
+  autodb.append(newbase)
+  for idx,i in enumerate(autodb[-40:]):
+    for jdx,j in enumerate(i):
+      context.grid[idx][jdx]=j
 
 parafill={"clouds":"CLOUDS"*20,"mountains":"MOUNTAINS"*12,"grass":"PARALLAX"*20,"near":"FTW!"*30}
 def parallax(context, step):

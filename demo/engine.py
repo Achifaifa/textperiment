@@ -53,6 +53,19 @@ class context:
     self.line(x+xsize,y,x+xsize,y+ysize,char)
     self.line(x,y+ysize,x+xsize+1,y+ysize,char)
 
+  def drawcube(self,x,y,side,rot):
+
+    vs=adjust(math.sin(rot)*side)
+    hs=adjust(math.cos(rot)*side)
+    dy=adjust(math.sin(rot*side)/2.0)
+    dx=adjust(math.cos(rot*side)/2.0)
+    x=x-dx; y=y-dy;
+
+    self.line(x,y,x+hs,y+vs,".");
+    self.line(x+hs,y+vs,x+hs-vs,y+hs+vs,".");
+    self.line(x+hs-vs,y+hs+vs,x-vs,y+hs,".");
+    self.line(x-vs,y+hs,x,y,".");
+
   def circle(self,xc,yc,b,char):
 
     a=b*2;a2=a*a;b2=b*b;twoa2=2*a2;twob2=2*b2;x=0;y=b;px=0;py=twoa2*y

@@ -14,19 +14,15 @@ testframe=[[33,39,33,32,28,37,26,36,19,27,19,25,17,26,15,25,14,25,14,22,13,20,15
 [33,39,33,33,29,38,26,36,19,28,20,26,18,26,17,25,16,25,15,21,17,20,16,22,19,22,19,21,21,20,23,21,23,23,24,23,28,30,33,23,36,23,37,21,37,20,35,20,34,17,33,15,33,15,30,8,32,3,37,3,43,5,45,5,47,7,48,8,50,8,52,11,50,13,51,14,51,16,53,15,54,17,50,18,48,19,48,18,47,20,47,21,48,22,47,23,46,24,50,30,54,23,55,22,53,20,54,18,56,19,56,18,58,16,59,17,59,18,60,18,61,19,60,21,61,21,58,23,57,25,58,27,53,36,51,37,50,36,50,39],
 [33,39,33,32,28,37,24,34,19,27,19,25,17,26,15,25,14,24,14,22,13,20,15,19,14,21,16,22,18,21,17,20,19,19,21,20,21,22,22,22,27,30,32,23,34,22,35,22,36,21,36,18,35,19,34,17,32,14,33,13,30,7,31,3,36,2,41,4,44,4,45,6,46,6,48,7,50,8,51,10,49,11,50,13,50,15,52,15,53,15,52,17,50,17,48,17,47,17,46,20,47,21,45,23,49,30,54,21,55,21,54,20,55,19,54,17,55,16,57,17,58,15,60,16,59,17,61,16,62,18,60,19,61,19,62,20,58,22,57,23,59,25,53,34,51,36,49,35,50,39],
 [33,39,33,33,30,37,27,37,19,27,19,26,18,26,17,25,15,25,14,21,16,20,16,21,17,22,19,21,18,21,20,19,22,21,22,22,23,23,28,30,32,23,35,23,36,23,37,21,36,20,35,20,34,17,32,15,33,14,30,6,32,3,36,2,42,4,44,5,47,7,48,8,50,8,51,11,50,12,50,13,51,14,50,15,53,17,50,18,48,18,48,19,47,20,47,21,45,24,46,24,50,30,54,22,55,21,54,21,54,19,55,18,57,18,56,18,57,16,59,17,59,18,60,17,61,18,60,20,61,20,61,22,58,23,57,24,58,27,54,34,52,36,50,36,51,39]]
-rayframe=[[69,0,65,6,63,7,61,8,61,10,56,12,62,10,62,8,64,8,64,6,68,5,73,11,67,16,67,19,66,20,66,20,65,21,61,30,66,21,66,21,67,20,68,19,68,16,74,11,68,3,73,0],[0,1,5,4,7,5,12,5,14,6,14,7,16,8,16,9,17,11,20,12,22,12,22,14,26,17,27,18,28,18,31,20,27,17,26,16,23,13,23,12,21,11,18,11,16,9,17,7,14,6,14,4,7,0,6,0,13,4,13,5,12,5,7,5,4,4,0,1]]
+rayframe=[[69,0,65,6,63,7,61,8,61,10,56,12,62,10,62,8,64,8,64,6,68,5,73,11,67,16,67,19,66,20,66,20,65,21,61,30,66,21,66,21,67,20,68,19,68,16,74,11,68,3,73,0],
+[0,1,5,4,7,5,12,5,14,6,14,7,16,8,16,9,17,11,20,12,22,12,22,14,26,17,27,18,28,18,31,20,27,17,26,16,23,13,23,12,21,11,18,11,16,9,17,7,14,6,14,4,7,0,6,0,13,4,13,5,12,5,7,5,4,4,0,1]]
 
 def loop(step):
 
   global auxstep1,auxstep2
   # DANGER ZONE
   # ef.mandelbrot(c,step)
-  ef.tunnel(c,step)
-  # ef.laugh(c,testframe[(step/5)%4])
-  # if not beat%4 and step%2: 
-  #   ef.laugh(c,rayframe[0])
-  # if beat%4==1 and step%2:
-  #   ef.laugh(c,rayframe[1])
+  ef.automaton(c,step)
 
   if not test:
     if beat<47:
@@ -66,19 +62,20 @@ def loop(step):
       ef.parallax(c,step*3)
       ef.scroll(c,"to the batcave",32," ",step-auxstep1)
     elif beat<189:
-      ef.plasma(c,step)
+      ef.rotozoom(c,step)
     elif beat<205:
       ef.moire(c,step)
     elif beat<220:
-      ef.tunnel(c,step)
-      c.text(2,4,"#","after much")
+      ef.plasma(c,step)
+      c.text(2,4,"#","after")
+      c.text(46,4,"#","much")    
       c.text(2,12,"#","time")
     elif beat<236:
       ef.automaton(c,step)
       c.text(7,4,"x","and")
       c.text(2,12,"x","headaches")
-    # TO-DO
     elif beat<251:
+      ef.tunnel(c,step)
       c.text(7,4,"#","its ready")
     elif beat<266:
       ef.floppyrainbow(c,floppy,step)
@@ -91,24 +88,29 @@ def loop(step):
       if beat%4==1 and step%2:
         ef.laugh(c,rayframe[1])
       ef.scroll(c,"mwahahahahahahahahahaha",3,"#",(step-auxstep1)*2)
-    # TO-DO
     elif beat<298:
       c.text(5,4,"#","brilliant")
     elif beat<314:
       ef.fire(c)
       c.text(4,3,"#", "the compo")
       c.text(4,11,"#"," is ours")
-    # TO-DO
     elif beat<329:
       c.text(7,4,"#","radar")
     elif beat<402:
       c.text(10,5,"#","greets")
       ef.sinescroll(c,"marcan",20,"#",step)
-      ef.sinescroll(c,"bixo",30,"#",step-120)
-      ef.sinescroll(c,"soga",20,"#",step-200)
-      ef.sinescroll(c,"freddy",30,"#",step-290)
-      #collapse, software failure
-      ef.sinescroll(c,"ekparty scene people",22,"#",step)
+      if beat>334:
+        ef.sinescroll(c,"bixo",30,"#",step-120)
+      if beat>339:
+        ef.sinescroll(c,"soga",20,"#",step-200)
+      if beat>344:
+        ef.sinescroll(c,"freddy",30,"#",step-290)
+      if beat>349:
+        ef.sinescroll(c,"collapse",20,"#",step-380)
+      if beat>354:
+        ef.sinescroll(c,"software failure",30,"#",step-470)
+      if beat>364:
+        ef.sinescroll(c,"ekparty scene people",22,"#",step-600)
     elif beat<420: 
       ef.euskallogo(c,vscroll,55)
     else: 1/0
@@ -133,7 +135,7 @@ def main():
   global cycle, beat
   os.system('clear')
   os.system("./midi2beep.py -o music.sh music.mid")
-  # subprocess.Popen(["bash","music.sh",])
+  #subprocess.Popen(["bash","music.sh",])
   while 1:
     c.clear()
     beat=adjust((time.time()*1000-startdate)/326)

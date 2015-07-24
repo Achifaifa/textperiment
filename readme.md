@@ -2,7 +2,8 @@
 
 64k ASCII demo written in python. Features a simple canvas-like engine and a 16 colour palette.
 
-The colours are not used.
+Code: Yuri Numerov (Achifaifa) -  achi <a> hush <.> ai
+Music: Stage7 - stage7 <a> stg7 <.> net
 
 source: Unobfuscated/uncompressed code and files
 music: music files

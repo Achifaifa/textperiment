@@ -113,6 +113,13 @@ def euskallogo(context,logo,step):
       try: context.grid[ni][nj]=j
       except: pass
 
+def gandalf(context,data,step):
+
+  step%=5
+  for i in range(len(data[step])):
+    for j in range(len(data[step][i])):
+      context.grid[i][j]=data[step][i][j]
+
 mandelpalette=[str(i) for i in range(10)]
 def mandelbrot(context,step):
   

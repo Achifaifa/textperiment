@@ -120,25 +120,6 @@ def gandalf(context,data,step):
     for j in range(len(data[step][i])):
       context.grid[i][j]=data[step][i][j]
 
-mandelpalette=[str(i) for i in range(10)]
-def mandelbrot(context,step):
-  
-  for yo in range(len(context.grid)):
-    for xo in range(len(context.grid[yo])):
-      x0=((3.5*xo/81)-2.5)
-      y0=(2*yo/41)-1
-      x=0.3
-      y=-0.3
-      iteration=0
-      maxiteration=100
-      while x**2+y**2<step/2.0 and iteration<maxiteration:
-        xtemp=(x**2)-(y**2)+x0
-        y=2*x*y+y0
-        x=xtemp
-        iteration+=1
-      colour=mandelpalette[iteration%10]
-      context.putpixel(xo,yo,colour)
-
 def rotozoom(context,step):
 
   x=adjust(40+15*math.sin(step/75.0))

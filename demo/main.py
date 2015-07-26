@@ -23,7 +23,7 @@ def loop(step):
   # DANGER ZONE
   #ef.mandelbrot(c,step)
   # ef.automaton(c,step)
-  # ef.gandalf(c,gandalfdata,step/4)
+  #ef.gandalf(c,gandalfdata,step/4)
   # c.text(5,4," ","brilliant")
 
   if not test:
@@ -144,7 +144,6 @@ def main():
   while 1:
     c.clear()
     beat=adjust((time.time()*1000-startdate)/326)
-    print beat,"/",cycle
     loop(cycle)
     cycle=adjust((time.time()*1000-startdate)/25)
     c.draw()

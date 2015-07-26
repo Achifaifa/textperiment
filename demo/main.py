@@ -25,6 +25,7 @@ def loop(step):
   # ef.automaton(c,step)
   #ef.gandalf(c,gandalfdata,step/4)
   # c.text(5,4," ","brilliant")
+  #ef.euskallogo(c,vscroll,55)
 
   if not test:
     if beat<46:
